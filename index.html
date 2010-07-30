@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+		<title>T-minus</title>
+		<style type="text/css">
+			body {
+				background-color:#333;
+				font-family:"Lucida Grande","Arial Unicode MS", sans-serif;
+				text-align:center;
+				margin:0px;
+				padding:0px;
+			}
+			ol, li, h3 {
+				padding:0;
+				margin:0;
+				position:relative;
+				list-style-type:none;
+			}
+			h1 { 
+				background-color:#000;
+				padding:10px 0;
+				margin-top:0;
+				color:#FFF;
+			}
+			h3 {
+				color:#FFF;
+				padding-bottom:5px;
+			}
+			h1, p {
+				font-family:Georgia;
+			}
+			ol li li {
+				background:#231F20;
+			}
+			p {
+				color:#646464;
+				font-size:50px;
+			}
+			.clear {
+				clear:both;
+			}
+			.highlight {
+				color:#f3f099;
+			}
+			
+			/* Countdown Clock
+			====================================== */
+			h3 {
+				text-align:right;
+			}
+			.digit, 
+			.colon {
+				height:120px;
+				text-align:center;
+				font-size:100px;
+			}
+			.colon {
+				color:#9c982d;
+				width:50px;
+				padding-top:17px;
+			}
+			.digit {
+				overflow:hidden;
+				float:right;
+				color:#FFF;
+			}
+			.numbers {
+				width:70px;
+				color:#dcd635;
+			}
+			.colon,
+			.unit {
+				float:left;
+			}
+			.clock {
+				margin:auto;
+				width:720px;
+			}
+			.days_heading {
+				color:#b26868;
+			}
+			.hours_heading {
+				color:#aa68b2;
+			}
+			.minutes_heading {
+				color:#6890b2;
+			}
+			.seconds_heading {
+				color:#68b286;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="countdown_clock">
+			<h1>THE Vegas Countdown</h1>
+			<div class="clock">
+				<div class="unit">
+					<h3 class="days_heading">Days</h3>
+					<ol id="days">
+						<li class="digit digit_two">
+							<ol class="numbers">
+								<li>0</li>
+								<li>1</li>
+								<li>2</li>
+								<li>3</li>
+								<li>4</li>
+								<li>5</li>
+								<li>6</li>
+								<li>7</li>
+								<li>8</li>
+								<li>9</li>
+							</ol>
+						</li>
+						<li class="digit digit_one">
+							<ol class="numbers">
+								<li>0</li>
+								<li>1</li>
+								<li>2</li>
+								<li>3</li>
+								<li>4</li>
+								<li>5</li>
+								<li>6</li>
+								<li>7</li>
+								<li>8</li>
+								<li>9</li>
+							</ol>
+						</li>
+					</ol>
+				</div>
+				<div class="colon">:</div>
+				<div class="unit">
+					<h3 class="hours_heading">Hours</h3>
+					<ol id="hours">
+						<li class="digit digit_two">
+							<ol class="numbers">
+								<li>0</li>
+								<li>1</li>
+								<li>2</li>
+								<li>3</li>
+								<li>4</li>
+								<li>5</li>
+								<li>6</li>
+								<li>7</li>
+								<li>8</li>
+								<li>9</li>
+							</ol>
+						</li>
+						<li class="digit digit_one">
+							<ol class="numbers">
+								<li>0</li>
+								<li>1</li>
+								<li>2</li>
+								<li>3</li>
+								<li>4</li>
+								<li>5</li>
+								<li>6</li>
+								<li>7</li>
+								<li>8</li>
+								<li>9</li>
+							</ol>
+						</li>
+					</ol>
+				</div>
+				<div class="colon">:</div>
+				<div class="unit">
+					<h3 class="minutes_heading">Minutes</h3>
+					<ol id="minutes">
+						<li class="digit digit_two">
+							<ol class="numbers">
+								<li>0</li>
+								<li>1</li>
+								<li>2</li>
+								<li>3</li>
+								<li>4</li>
+								<li>5</li>
+								<li>6</li>
+								<li>7</li>
+								<li>8</li>
+								<li>9</li>
+							</ol>
+						</li>
+						<li class="digit digit_one">
+							<ol class="numbers">
+								<li>0</li>
+								<li>1</li>
+								<li>2</li>
+								<li>3</li>
+								<li>4</li>
+								<li>5</li>
+								<li>6</li>
+								<li>7</li>
+								<li>8</li>
+								<li>9</li>
+							</ol>
+						</li>
+					</ol>
+				</div>
+				<div class="colon">:</div>
+				<div class="unit">
+					<h3 class="seconds_heading">Seconds</h3>
+					<ol id="seconds">
+						<li class="digit digit_two">
+							<ol class="numbers">
+								<li>0</li>
+								<li>1</li>
+								<li>2</li>
+								<li>3</li>
+								<li>4</li>
+								<li>5</li>
+								<li>6</li>
+								<li>7</li>
+								<li>8</li>
+								<li>9</li>
+							</ol>
+						</li>
+						<li class="digit digit_one">
+							<ol class="numbers">
+								<li>0</li>
+								<li>1</li>
+								<li>2</li>
+								<li>3</li>
+								<li>4</li>
+								<li>5</li>
+								<li>6</li>
+								<li>7</li>
+								<li>8</li>
+								<li>9</li>
+							</ol>
+						</li>
+					</ol>
+				</div>
+			<div class="clear"></div>
+			<p>July 21, 2010</p>
+			</div>
+		</div>
+		<div class="scripts">
+			<script src="http://www.google.com/jsapi?key=ABQIAAAAGo11ZcMm47y1rDm6fSeSrxTRWUZ2dF6uiMubmAdNH9FK51MbThQs8UCAytbTyvgi-LqzlK7kvwBzkA" type="text/javascript"></script>
+			<script type="text/javascript">
+				google.load("jquery", "1.4.2");
+			
+				google.setOnLoadCallback(function() {
+					var end_date = new Date(2010, 6, 21);
+				
+					$(document).ready(function() {
+						var days, hours, minutes, seconds;
+						var interval = setInterval(function() {
+							var timediff = Math.ceil(end_date.getTime() - new Date().getTime());
+							days = Math.floor(timediff / (1000 * 60 * 60 * 24)); 
+							timediff -= days * (1000 * 60 * 60 * 24);
+
+							hours = Math.floor(timediff / (1000 * 60 * 60)); 
+							timediff -= hours * (1000 * 60 * 60);
+
+							minutes = Math.floor(timediff / (1000 * 60)); 
+							timediff -= minutes * (1000 * 60);
+
+							seconds = Math.floor(timediff / 1000);
+							timediff -= seconds * 1000;
+
+							insert($('#days'), days);
+							insert($('#hours'), hours);
+							insert($('#minutes'), minutes);
+							insert($('#seconds'), seconds);
+						}, 1000);
+
+						function insert(container, time) {
+							var height = $('.numbers li').height();
+							time = time.toString();
+							if(time.length == 2) {
+								$('.digit_one .numbers', container).animate({ top:-(time[0] * height) });
+								$('.digit_two .numbers', container).animate({ top:-(time[1] * height) });
+							} else {
+								$('.digit_one .numbers', container).animate({ top:0 });
+								$('.digit_two .numbers', container).animate({ top:-(time * height) });
+							}
+						}
+					});
+				});
+			</script>
+		</div>
+	</body>
+</html>
