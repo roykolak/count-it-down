@@ -1,0 +1,126 @@
+body {
+	background-color:#CCC;
+	font-family:"Lucida Grande","Arial Unicode MS", sans-serif;
+	text-align:center;
+	margin:0px;
+	padding:0px;
+}
+ol, li, h3 {
+	padding:0;
+	margin:0;
+	position:relative;
+	list-style-type:none;
+}
+h1 { 
+	text-shadow: 1px 2px 1px #333;
+	padding:10px 0;
+	margin:0	;
+	color:#DDD;
+	font-size:50px;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8a7756), to(#543f1a));
+}
+h3 {
+	text-align:right;
+	position:absolute;
+	top:-30px;
+	color:#b1a679;
+}
+ol li li {
+	background:#231F20;
+}
+p {
+	color:#646464;
+	font-size:50px;
+}
+form {
+	width:600px;
+	margin:auto;
+	padding-top:40px;
+}
+input {
+	clear:both;
+	display:block;
+	margin:auto;
+	margin-bottom:20px;
+	text-align:center;
+	width:100%;
+	font-size:50px;
+}
+input.date {
+	font-size:30px;
+}
+
+#form {
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#5a7cd1), to(#414f72));
+}
+#clock {
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#615730), to(#928349));
+}
+
+/* Countdown Clock
+====================================== */
+.top {
+	color:#615730;
+	top:-32px;
+}
+.bottom {
+	color:#333;
+	top:-29px;
+}
+.clock_label {
+	z-index:100;
+}
+.digit, 
+.colon {
+	height:120px;
+	text-align:center;
+	font-size:100px;
+}
+.colon {
+	color:#FFF;
+	width:50px;
+}
+.digit {
+	overflow:hidden;
+	float:right;
+	color:#FFF;
+	background:#000;
+}
+.numbers {
+	width:70px;
+	color:#FFF;
+	background:#000;
+	border-right:1px solid #333;
+}
+.colon {
+	border-right:1px solid #333;
+}
+.overlay {
+	height:120px;
+	-webkit-mask-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.2)));	
+}
+.colon,
+.unit {
+	float:left;
+	position:relative;
+	background:#000;
+}
+.clock {
+	border-top:6px solid #534a26;
+	border-bottom:6px solid #b1a679;
+	border-left:6px solid #786d40;
+	border-right:6px solid #786d40;
+	margin:100px auto;
+	width:721px;
+}
+
+#frame {
+	width:100%;
+	height:600px;
+	position:relative;
+	overflow:hidden;
+}
+#content {
+	height:500px;
+	position:relative;
+}

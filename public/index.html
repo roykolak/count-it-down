@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Count it down</title>
+    <style type="text/css">
+      body {
+        background-color:#CCC;
+        font-family:"Lucida Grande","Arial Unicode MS", sans-serif;
+        text-align:center;
+        margin:0px;
+        padding:0px;
+      }
+      ol, li, h3, h4 {
+        padding:0;
+        margin:0;
+        position:relative;
+        list-style-type:none;
+      }
+      h1 { 
+        text-shadow: 1px 2px 1px #333;
+        padding:10px 0;
+        margin:0;
+        color:#DDD;
+        font-size:50px;
+        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8a7756), to(#543f1a));
+      }
+      h3 {
+        text-align:right;
+        position:absolute;
+        top:-30px;
+        color:#3b3314;
+      }
+      h4 {
+        margin-bottom:5px;
+      }
+      ol li li {
+        background:#231F20;
+        position:relative;
+      }
+      ol li li .top {
+        position:absolute;
+      }
+      p {
+        color:#000;
+        font-size:15px;
+        background:#CCC;
+        width:700px;
+        margin:0 auto 20px;
+        padding:10px;
+        border-radius:5px;
+      }
+      form {
+        width:600px;
+        margin:auto;
+        padding-top:40px;
+      }
+      input {
+        clear:both;
+        display:block;
+        margin:auto;
+        margin-bottom:20px;
+        text-align:center;
+        width:100%;
+        font-size:50px;
+      }
+      input.date {
+        font-size:30px;
+      }
+      a {
+        padding:4px 8px;
+        background:#000;
+        opacity:.4;
+        color:#FFF;
+        border-radius:6px;
+        border-bottom:1px solid #b1a679;
+        border-left:1px solid #786d40;
+        text-decoration:none;
+      }
+      a:hover {
+        background:#CCC;
+        color:#000;
+      }
+
+      section {
+        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#615730), to(#928349));
+      }
+
+      /* Countdown Clock
+      ====================================== */
+      .top {
+        top:-31px;
+      }
+      .bottom {
+        color:#938346;
+        top:-29px;
+      }
+      .clock_label {
+        z-index:100;
+      }
+      .digit, .colon {
+        height:120px;
+        text-align:center;
+        font-size:100px;
+      }
+      .colon {
+        color:#FFF;
+        width:50px;
+      }
+      .digit {
+        overflow:hidden;
+        float:right;
+        background:#000;
+      }
+      .numbers {
+        width:70px;
+        color:#CCC;
+        background:#000;
+        border-right:1px solid #333;
+      }
+      .numbers li {
+        text-shadow:0px -2px 1px #FFF;
+      }
+      .numbers.red li {
+        text-shadow:0px -2px 1px #dc6a6a;
+      }
+      .colon {
+        border-right:1px solid #333;
+      }
+      .overlay {
+        height:120px;
+        -webkit-mask-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.2)));	
+      }
+      .red {
+        color:#e63333;
+      }
+      .colon,
+      .unit {
+        float:left;
+        position:relative;
+        background:#000;
+      }
+      .clock {
+        border-top:6px solid #534a26;
+        border-bottom:6px solid #b1a679;
+        border-left:6px solid #786d40;
+        border-right:6px solid #786d40;
+        margin:100px auto;
+        width:721px;
+      }
+
+      #frame {
+        width:100%;
+        height:600px;
+        position:relative;
+        overflow:hidden;
+      }
+      #content {
+        height:500px;
+        position:relative;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Count it Down</h1>
+    </header>
+    <div id="frame">
+      <div id="content">
+        <section id="form">
+          <form>
+            <input type="text" id="title" placeholder="clock title" />
+            <input type="text" id="date" class="date" placeholder="Month, 19 2010 5:10pm"/>
+            <input type="submit" id="load" value="count it down" />
+          </form>
+        </section>
+        <section id="clock">
+          <audio id="tick" src="tick.mp3" loop="loop"></audio>
+          <div class="countdown_clock">
+            <div class="clock">
+                <div class="unit first">
+                  <h3 class="clock_label">Days</h3>
+                  <h3 class="top">Days</h3>
+                  <h3 class="bottom">Days</h3>
+                  <div class="overlay">
+                    <ol id="days">
+                      <li class="digit digit_two">
+                        <ol class="numbers">
+                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                        </ol>
+                      </li>
+                      <li class="digit digit_one">
+                        <ol class="numbers">
+                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+                <div class="colon">:</div>
+                <div class="unit">
+                  <h3 class="clock_label">Hours</h3>
+                  <h3 class="top">Hours</h3>
+                  <h3 class="bottom">Hours</h3>
+                  <div class="overlay">
+                    <ol id="hours">
+                      <li class="digit digit_two">
+                        <ol class="numbers">
+                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                        </ol>
+                      </li>
+                      <li class="digit digit_one">
+                        <ol class="numbers">
+                          <li>0</li><li>1</li><li>2</li><li>0</li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+                <div class="colon">:</div>
+                <div class="unit">
+                  <h3 class="clock_label">Minutes</h3>
+                  <h3 class="top">Minutes</h3>
+                  <h3 class="bottom">Minutes</h3>
+                  <div class="overlay">
+                    <ol id="minutes">
+                      <li class="digit digit_two">
+                        <ol class="numbers">
+                        <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                        </ol>
+                      </li>
+                      <li class="digit digit_one">
+                        <ol class="numbers">
+                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>0</li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+                <div class="colon">:</div>
+                <div class="unit last">
+                  <h3 class="clock_label">Seconds</h3>
+                  <h3 class="top">Seconds</h3>
+                  <h3 class="bottom">Seconds</h3>
+                  <div class="overlay">
+                    <ol id="seconds">
+                      <li class="digit digit_two">
+                        <ol class="numbers red">
+                        <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                        </ol>
+                      </li>
+                      <li class="digit digit_one">
+                        <ol class="numbers">
+                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>0</li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+              <div style="clear:both"></div>
+            </div>
+            <h4>Share this clock! Copy & paste...</h4>
+            <p id="url"></p>
+
+            <a href="#" id="toggle_sound" class="sound">Toggle sound</a>
+            <a href="#" id="back">New clock</a>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="scripts">
+      <script src="javascripts/jquery.js"></script>
+      <script>
+        (function($) {
+          $.urlParam = function(name){
+            var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            return unescape(results[1]) || null;
+          }
+
+           audio = document.getElementsByTagName("audio")[0],
+              db = localStorage,
+              clock = null;
+            
+          $('#date').val(new Date().toDateString());
+
+          if(db.sound == undefined) {
+            db.sound = "1";
+          }
+
+          $('section').height($(window).height() - $('header').height());
+
+          $('#load').click(function(ev) {
+            ev.preventDefault();
+            $('#content').animate({top: -$('section').height() }, {
+              complete: function() {
+                var title = $('#title').val() || $('#title').attr('placeholder');
+                var date = $('#date').val() || $('#date').attr('placeholder');
+                clock = new Clock(title, date);
+                clock.start();
+              }
+            });
+          });
+
+          $('#back').click(function(ev) {
+            $('h1').text('Count it down');
+            ev.preventDefault();
+            $('#content').animate({top:0 });
+            db.removeItem('date');
+            db.removeItem('title');
+            clock.stop()
+            clock.reset();
+          });
+
+          $('#toggle_sound').click(function(ev) {
+            ev.preventDefault();
+            if(db.sound == "1") {
+              db.sound = "0";
+              audio.pause();
+            } else {
+              db.sound = "1";
+            }
+          });
+          
+          if($.urlParam('title') != null) {
+            db.title = $.urlParam('title');
+            db.date = $.urlParam('date');
+          }
+
+          if(db.date != undefined) {
+            $('#content').css({top: -$('section').height() });
+            clock = new Clock(db.title, db.date);
+            clock.start();
+          } else {
+            $('#form').css({ visibility: 'visible' });
+          }
+          
+  			  function Clock(title, date) {
+  			    var clockInterval, flasherInterval;
+  			    $('#seconds .digit_two .numbers').addClass('red');
+  			    db.setItem('date', date);
+  			    db.setItem('title', title);
+  			    $('h1').text(db.title);
+  			    $('#url').text(window.location.href.replace(window.location.search, '') + '?title=' + db.title + '&date=' + db.date);
+  			    
+            var endDate = new Date(date);
+            
+            var dM = new Mover($('#days'), 'days'),
+                hM = new Mover($('#hours'), 'hours'),
+                mM = new Mover($('#minutes'), 'minutes'),
+                sM = new Mover($('#seconds'), 'seconds'),
+                d, h, m, s;
+
+            return {
+              start: function() {
+                clockInterval = setInterval(function() {
+                  var diff = Math.ceil(endDate.getTime() - new Date().getTime());
+                  d = Math.floor(diff / (1000 * 60 * 60 * 24)); 
+                  diff -= d * (1000 * 60 * 60 * 24);
+
+                  h = Math.floor(diff / (1000 * 60 * 60)); 
+                  diff -= h * (1000 * 60 * 60);
+
+                  m = Math.floor(diff / (1000 * 60)); 
+                  diff -= m * (1000 * 60);
+
+                  s = Math.floor(diff / 1000);
+                  diff -= s * 1000;
+
+                  console.log(d + ' ' + h + ' ' + m + ' ' + s);
+                  if(d < 0 || h < 0 || m < 0 || s < 0) {
+                    flasherInterval = new Flasher(d, h, m, s).flashAll();
+                    audio.pause();
+                    clock.stop();
+                  } else {
+                    dM.move(d);
+                    hM.move(h);
+                    mM.move(m);
+                    sM.move(s);
+
+                    if(db.sound == "1") {
+                      audio.play();
+                    }
+
+                    new Flasher(d, h, m, s).flashIfNeeded();
+                  }
+                }, 1000);
+              },
+              stop: function() {
+                clearInterval(clockInterval);
+                audio.pause();
+              },
+              reset: function() {
+                $('.numbers').animate({top:0});
+                clearInterval(flasherInterval);
+              }
+            }
+          }
+  			  
+          function Flasher(d, h, m, s) {
+            var s = s.toString(),
+                m = m.toString(),
+                h = h.toString(),
+                d = d.toString();
+                
+            return {
+              flashIfNeeded: function() {
+                // Todo: Optimize
+                if(h == 0 && m == 0 && s < 3) {
+                  $('#seconds .digit_one .numbers, #minutes .numbers, #hours .numbers, #days .numbers').toggleClass('red');
+                } else if(m == 0 && s < 3) {
+                  $('#seconds .digit_one .numbers, #minutes .numbers, #hours .numbers').toggleClass('red');
+                } else if(s < 3) {
+                  $('#seconds .digit_one .numbers, #minutes .numbers').toggleClass('red');
+                } else if(s[1] < 3) {
+                  $('#seconds .digit_one .numbers').toggleClass('red');
+                } else {
+                  $('#seconds .digit_one .numbers, #minutes .numbers, #hours .numbers, #days .numbers').removeClass('red');
+                }
+              },
+              flashAll: function() {
+                $('.numbers').removeClass('red');
+                return setInterval(function() {
+                  $('.numbers').toggleClass('red');
+                }, 1000);
+              }
+            };
+          }
+  			  
+  			  function Mover(container, unit) {
+            var previousTime = null,
+                height = $('.numbers li').height(),
+                digitOne = $('.digit_one .numbers', container),
+                digitTwo = $('.digit_two .numbers', container),
+                digitOneJump = 6;  
+                
+            if(unit == 'days') {
+              digitOneJump = 10;
+            }
+
+            return {
+              move: function(time) {
+                var time = time.toString();
+                  
+                if(previousTime != time) {
+                    previousTime = time;
+                    
+                  if(time.length == 2) {
+                    $(digitOne).animate({ top:-(time[0] * height) }, {
+                      complete:function() {
+                        if(time[0] * height == 0) {
+                          $(digitOne).css({ top: -(digitOneJump * height) });
+                        }
+                      }
+                    });
+                    $(digitTwo).animate({ top:-(time[1] * height) }, {
+                      complete:function() {
+                        if(time[1] * height == 0) {
+                          $(digitTwo).css({ top: -(10 * height) });
+                        }
+                      }
+                    });
+                  } else {
+                    $(digitOne).animate({ top:0 }, {
+                      complete:function() {
+                        if(time * height == 0) {
+                          $(digitOne).css({ top: -(digitOneJump * height) });
+                        }
+                      }
+                    });
+                    $(digitTwo).animate({ top:-(time * height) }, {
+                      complete:function() {
+                        if(time * height == 0) {
+                          $(digitTwo).css({ top: -(10 * height) });
+                        }
+                      }
+                    });
+                  }
+                }
+              }
+            }
+  			  }
+				})($);
+			</script>
+		</div>
+	</body>
+</html>
