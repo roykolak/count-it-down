@@ -11,49 +11,56 @@
         margin:0px;
         padding:0px;
       }
-      ol, li, h3, h4 {
+      ol, li, h1, h3, h4, header {
         padding:0;
         margin:0;
         position:relative;
         list-style-type:none;
       }
       h1 { 
-        text-shadow: 1px 2px 1px #333;
-        padding:10px 0;
-        margin:0;
-        color:#DDD;
-        font-size:50px;
-        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8a7756), to(#543f1a));
+        color:#3b3314;
+        text-shadow: 0px 1px 0px #938346;
+        font-size:40px;
+      }
+      #form h1 {
+        color:#FFF;
+        margin:0 0 20px;
+        text-shadow: 1px 2px 0px #000;
       }
       h3 {
-        text-align:right;
-        position:absolute;
-        top:-30px;
-        color:#3b3314;
+        color:#544a20;
+        text-shadow: 0px 1px 0px #938346;
+        font-size:16px;
       }
       h4 {
         margin-bottom:5px;
+        color:#484124;
       }
       ol li li {
         background:#231F20;
         position:relative;
       }
-      ol li li .top {
-        position:absolute;
-      }
       p {
-        color:#000;
+        color:#292c2c;
         font-size:15px;
-        background:#CCC;
-        width:700px;
-        margin:0 auto 20px;
-        padding:10px;
-        border-radius:5px;
+        position:relative;
+        text-shadow:0px 1px 0px #000;
       }
       form {
-        width:600px;
+        width:700px;
         margin:auto;
-        padding-top:40px;
+      }
+      form p {
+        margin-top:-35px;
+        padding:20px 0 5px;
+        z-index:1;
+        position:relative;
+        color:#FFF;
+        border-radius:4px;
+        opacity:0.5;
+      }
+      input[type=text]:hover {
+        background:#eee;
       }
       input {
         clear:both;
@@ -63,11 +70,25 @@
         text-align:center;
         width:100%;
         font-size:50px;
+        padding:10px 0;
+        border:1px solid #555;
+        border-radius:7px;
+        position:relative;
+        z-index:2;
+        color:#444;
       }
       input.date {
         font-size:30px;
       }
-      a {
+      input#load {
+        color:#f5baba;
+        text-shadow:0px -1px 0px #000;
+        border:none;
+        border-top:1px solid #AAA;
+        margin-top:40px;
+        font-size:30px;
+      }
+      .controls a {
         padding:4px 8px;
         background:#000;
         opacity:.4;
@@ -77,31 +98,67 @@
         border-left:1px solid #786d40;
         text-decoration:none;
       }
-      a:hover {
+      .controls a:hover {
         background:#CCC;
         color:#000;
       }
-
-      section {
-        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#615730), to(#928349));
+      
+      form p {
+        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#343f56), to(#888));
       }
-
+      input {
+        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#bbb), to(#eee));
+      }
+      input[type=submit] {
+        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ba3b1d), to(#a22c11));
+      }
+      input[type=submit]:hover {
+        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(red), to(#a22c11));
+      }
+      #form {
+        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#30445c), to(#555));
+      }
+      #clock {
+        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#695e2e), to(#a49764));
+      }
+      .overlay {
+        -webkit-mask-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.2)));	
+      }
+      
       /* Countdown Clock
       ====================================== */
-      .top {
-        top:-31px;
+      .sharing {
+        bottom:0px;
+        position:absolute;
+        width:100%;
+        background:#7d7244;
+        padding:10px 10px 10px;
       }
-      .bottom {
-        color:#938346;
-        top:-29px;
+      .sharing h4,
+      .sharing .url {
+        opacity:.8;
+        font-size:12px;
       }
-      .clock_label {
-        z-index:100;
+      .sharing .url:hover {
+        opacity:1;
+      }
+      .sharing h4 { 
+        color:#000;
+        font-size:14px;
+      }
+      .sharing .url {
+        background:#c8c1a2;
+        padding:5px 9px;
+        border-radius:5px;
+        border-top:1px solid #eee9d1;
+        font-weight:bold;
       }
       .digit, .colon {
-        height:120px;
         text-align:center;
-        font-size:100px;
+        font-size:120px;
+      }
+      .digit, .colon, .overlay {
+        height:140px;
       }
       .colon {
         color:#FFF;
@@ -113,10 +170,9 @@
         background:#000;
       }
       .numbers {
-        width:70px;
+        width:83px;
         color:#CCC;
         background:#000;
-        border-right:1px solid #333;
       }
       .numbers li {
         text-shadow:0px -2px 1px #FFF;
@@ -124,12 +180,9 @@
       .numbers.red li {
         text-shadow:0px -2px 1px #dc6a6a;
       }
-      .colon {
+      .colon, .numbers {
         border-right:1px solid #333;
-      }
-      .overlay {
-        height:120px;
-        -webkit-mask-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.2)));	
+        border-right:1px solid #333;
       }
       .red {
         color:#e63333;
@@ -140,130 +193,158 @@
         position:relative;
         background:#000;
       }
+      .unit h3 {
+        text-align:right;
+        position:absolute;
+        top:-30px;        
+      }
       .clock {
-        border-top:6px solid #534a26;
-        border-bottom:6px solid #b1a679;
+        border-top:6px solid #433b19;
+        border-bottom:6px solid #e6daa3;
         border-left:6px solid #786d40;
         border-right:6px solid #786d40;
-        margin:100px auto;
-        width:721px;
+        margin:auto;
+        width:825px;
+        margin-bottom:20px;
       }
-
+      #clock {
+        position:relative;
+      }
       #frame {
         width:100%;
-        height:600px;
         position:relative;
         overflow:hidden;
       }
+      .credit {
+        position:absolute;
+        top:-5px;
+        left:-30px;
+        width:220px;
+        height:12px;
+        z-index:100;
+        font-size:11px;
+        opacity:0.3;
+        color:#000;
+      }
+      .credit a {
+        color:#000;
+      }
       #content {
-        height:500px;
         position:relative;
+      }
+
+      .controls {
+        position:absolute;
+        top:10px;
+        right:5px;
+        z-index:10;
       }
     </style>
   </head>
   <body>
-    <header>
-      <h1>Count it Down</h1>
-    </header>
     <div id="frame">
+      <p class="credit"><a href="mailto:roy.kolak@gmail.com">Roy Kolak</a>, Copyright 2010</p>
       <div id="content">
         <section id="form">
-          <form>
-            <input type="text" id="title" placeholder="clock title" />
-            <input type="text" id="date" class="date" placeholder="Month, 19 2010 5:10pm"/>
-            <input type="submit" id="load" value="count it down" />
-          </form>
+          <div class="wrapper">
+            <form>
+              <h1>Countdown to Zero</h1>
+              <input type="text" id="title" placeholder="Clock title" />
+              <p>The title of your countdown clock.</p>
+              <input type="text" id="date" class="date" placeholder="Month, 19 2010 5:10pm"/>
+              <p>Your date will be parsed, be friendly!</p>
+              <input type="submit" id="load" value="Start" />
+            </form>
+          </div>
         </section>
         <section id="clock">
           <audio id="tick" src="tick.mp3" loop="loop"></audio>
-          <div class="countdown_clock">
-            <div class="clock">
-                <div class="unit first">
-                  <h3 class="clock_label">Days</h3>
-                  <h3 class="top">Days</h3>
-                  <h3 class="bottom">Days</h3>
-                  <div class="overlay">
-                    <ol id="days">
-                      <li class="digit digit_two">
-                        <ol class="numbers">
-                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
-                        </ol>
-                      </li>
-                      <li class="digit digit_one">
-                        <ol class="numbers">
-                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
-                        </ol>
-                      </li>
-                    </ol>
-                  </div>
-                </div>
-                <div class="colon">:</div>
-                <div class="unit">
-                  <h3 class="clock_label">Hours</h3>
-                  <h3 class="top">Hours</h3>
-                  <h3 class="bottom">Hours</h3>
-                  <div class="overlay">
-                    <ol id="hours">
-                      <li class="digit digit_two">
-                        <ol class="numbers">
-                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
-                        </ol>
-                      </li>
-                      <li class="digit digit_one">
-                        <ol class="numbers">
-                          <li>0</li><li>1</li><li>2</li><li>0</li>
-                        </ol>
-                      </li>
-                    </ol>
-                  </div>
-                </div>
-                <div class="colon">:</div>
-                <div class="unit">
-                  <h3 class="clock_label">Minutes</h3>
-                  <h3 class="top">Minutes</h3>
-                  <h3 class="bottom">Minutes</h3>
-                  <div class="overlay">
-                    <ol id="minutes">
-                      <li class="digit digit_two">
-                        <ol class="numbers">
-                        <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
-                        </ol>
-                      </li>
-                      <li class="digit digit_one">
-                        <ol class="numbers">
-                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>0</li>
-                        </ol>
-                      </li>
-                    </ol>
-                  </div>
-                </div>
-                <div class="colon">:</div>
-                <div class="unit last">
-                  <h3 class="clock_label">Seconds</h3>
-                  <h3 class="top">Seconds</h3>
-                  <h3 class="bottom">Seconds</h3>
-                  <div class="overlay">
-                    <ol id="seconds">
-                      <li class="digit digit_two">
-                        <ol class="numbers red">
-                        <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
-                        </ol>
-                      </li>
-                      <li class="digit digit_one">
-                        <ol class="numbers">
-                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>0</li>
-                        </ol>
-                      </li>
-                    </ol>
-                  </div>
-                </div>
-              <div style="clear:both"></div>
-            </div>
-            <h4>Share this clock! Copy & paste...</h4>
-            <p id="url"></p>
-
+          <div class="controls">
             <a href="#" id="toggle_sound" class="sound">Toggle sound</a>
             <a href="#" id="back">New clock</a>
+          </div>
+          <h1 id="clock_title"></h1>
+          <div class="wrapper">
+            <div class="countdown_clock">
+              <div class="clock">
+                  <div class="unit first">
+                    <h3>Days</h3>
+                    <div class="overlay">
+                      <ol id="days">
+                        <li class="digit digit_two">
+                          <ol class="numbers">
+                            <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                          </ol>
+                        </li>
+                        <li class="digit digit_one">
+                          <ol class="numbers">
+                            <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </div>
+                  </div>
+                  <div class="colon">:</div>
+                  <div class="unit">
+                    <h3>Hours</h3>
+                    <div class="overlay">
+                      <ol id="hours">
+                        <li class="digit digit_two">
+                          <ol class="numbers">
+                            <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                          </ol>
+                        </li>
+                        <li class="digit digit_one">
+                          <ol class="numbers">
+                            <li>0</li><li>1</li><li>2</li><li>0</li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </div>
+                  </div>
+                  <div class="colon">:</div>
+                  <div class="unit">
+                    <h3>Minutes</h3>
+                    <div class="overlay">
+                      <ol id="minutes">
+                        <li class="digit digit_two">
+                          <ol class="numbers">
+                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                          </ol>
+                        </li>
+                        <li class="digit digit_one">
+                          <ol class="numbers">
+                            <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>0</li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </div>
+                  </div>
+                  <div class="colon">:</div>
+                  <div class="unit last">
+                    <h3>Seconds</h3>
+                    <div class="overlay">
+                      <ol id="seconds">
+                        <li class="digit digit_two">
+                          <ol class="numbers red">
+                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                          </ol>
+                        </li>
+                        <li class="digit digit_one">
+                          <ol class="numbers">
+                            <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>0</li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </div>
+                  </div>
+                <div style="clear:both"></div>
+              </div>
+            </div>
+            <h3 id="end_date"></h3>
+            <div class="sharing">
+              <h4>Share this countdown: <a href="#" id="url" class="url"></a></h4>
+            </div>
           </div>
         </section>
       </div>
@@ -274,76 +355,100 @@
         (function($) {
           $.urlParam = function(name){
             var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
-            return unescape(results[1]) || null;
+            return (results != null ? unescape(results[1]) : null);
           }
 
            audio = document.getElementsByTagName("audio")[0],
               db = localStorage,
-              clock = null;
+              clock = null,
+              load = new Load();
             
-          $('#date').val(new Date().toDateString());
+          var sample_date = new Date();
+          $('#date').attr('placeholder', "October 17, 2010 13:00");
 
           if(db.sound == undefined) {
             db.sound = "1";
           }
 
-          $('section').height($(window).height() - $('header').height());
+          $('.wrapper').css({ paddingTop:$('section').height() / 1.5 });
+          $('section, #frame').height($(window).height());
+
 
           $('#load').click(function(ev) {
             ev.preventDefault();
-            $('#content').animate({top: -$('section').height() }, {
-              complete: function() {
-                var title = $('#title').val() || $('#title').attr('placeholder');
-                var date = $('#date').val() || $('#date').attr('placeholder');
-                clock = new Clock(title, date);
-                clock.start();
-              }
-            });
+            var title = $('#title').val() || $('#title').attr('placeholder');
+            var date = $('#date').val() || $('#date').attr('placeholder');
+            load.clock(title, date);
           });
 
           $('#back').click(function(ev) {
-            $('h1').text('Count it down');
             ev.preventDefault();
-            $('#content').animate({top:0 });
-            db.removeItem('date');
-            db.removeItem('title');
-            clock.stop()
-            clock.reset();
+            load.form();
           });
 
           $('#toggle_sound').click(function(ev) {
             ev.preventDefault();
-            if(db.sound == "1") {
-              db.sound = "0";
-              audio.pause();
-            } else {
-              db.sound = "1";
-            }
+            toggleSound();
           });
           
+          //Loader
           if($.urlParam('title') != null) {
-            db.title = $.urlParam('title');
-            db.date = $.urlParam('date');
-          }
-
-          if(db.date != undefined) {
-            $('#content').css({top: -$('section').height() });
-            clock = new Clock(db.title, db.date);
-            clock.start();
+            $('#title').val($.urlParam('title'));
+            $('#date').val($.urlParam('date'));
+          } else if(db.date != undefined) {
+            load.clock(db.title, db.date, 0);
           } else {
-            $('#form').css({ visibility: 'visible' });
+            load.form();
           }
           
-  			  function Clock(title, date) {
-  			    var clockInterval, flasherInterval;
-  			    $('#seconds .digit_two .numbers').addClass('red');
-  			    db.setItem('date', date);
-  			    db.setItem('title', title);
-  			    $('h1').text(db.title);
-  			    $('#url').text(window.location.href.replace(window.location.search, '') + '?title=' + db.title + '&date=' + db.date);
-  			    
-            var endDate = new Date(date);
+          function toggleSound() {
+            db.sound = (db.sound == "1" ? "0" : "1");
+            if(db.sound == "0") {
+              audio.pause();
+            }
+          }
+          
+          function Load() {
+            return {
+              clock: function(title, date, duration_override) {
+                var duration = 500;
+                if(typeof(duration_override) != 'undefined') {
+                  duration = duration_override;
+                }
+                $('#end_date').text(date.toLocaleString());
+                $('#clock_title').text(title);
+                var url = window.location.href.replace(window.location.search, '') + '?title=' + title + '&date=' + date;
+                $('#url').text(url).attr('href', url);
+                
+                $('#content').animate({top: -$('section').height() }, {
+                  duration:duration,
+                  complete: function() {
+                    clock = new Clock(title, date);
+                    clock.start();
+                  }
+                });
+              },
+              form: function() {
+                $('#form').css({ visibility: 'visible' });
+                db.removeItem('date');
+                db.removeItem('title');
+                $('#content').animate({top:0 });
+                clock.stop()
+                clock.reset();
+              }
+            }
+          }
+          
+          function Clock(title, date) {
+            var clockInterval, flasherInterval;
+
+            db.date = date;
+            db.title = title;
             
+            $('#seconds .digit_two .numbers').addClass('red');
+
+            var endDate = new Date(date);
+
             var dM = new Mover($('#days'), 'days'),
                 hM = new Mover($('#hours'), 'hours'),
                 mM = new Mover($('#minutes'), 'minutes'),
@@ -354,6 +459,7 @@
               start: function() {
                 clockInterval = setInterval(function() {
                   var diff = Math.ceil(endDate.getTime() - new Date().getTime());
+                  
                   d = Math.floor(diff / (1000 * 60 * 60 * 24)); 
                   diff -= d * (1000 * 60 * 60 * 24);
 
@@ -366,7 +472,6 @@
                   s = Math.floor(diff / 1000);
                   diff -= s * 1000;
 
-                  console.log(d + ' ' + h + ' ' + m + ' ' + s);
                   if(d < 0 || h < 0 || m < 0 || s < 0) {
                     flasherInterval = new Flasher(d, h, m, s).flashAll();
                     audio.pause();
