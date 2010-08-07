@@ -187,7 +187,7 @@
         border-left:6px solid #786d40;
         border-right:6px solid #786d40;
         margin:auto;
-        width:825px;
+        width:910px;
         margin-bottom:20px;
         margin-top:50px;
       }
@@ -263,8 +263,11 @@
       
       
       form p {
-        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#343f56), to(#888));
+        background: linear-gradient(left top, #343f56, #888);
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#343f56), to(#888));
         background: -moz-linear-gradient(center top, #343f56, #888);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#343f56', endColorstr='#888');
+        
         border-radius:4px;
         -moz-border-radius:4px;
       }
@@ -273,29 +276,40 @@
         -moz-border-radius:10px;
       }
       input {
-        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#bbb), to(#eee));
+        background: linear-gradient(left top, #bbb, #eee);
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#bbb), to(#eee));
         background: -moz-linear-gradient(center top, #bbb, #eee);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bbb', endColorstr='#eee');
+        
         border-radius:7px;
         -moz-border-radius:7px;
       }
       .button {
-        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ba3b1d), to(#a22c11));
+        background: linear-gradient(left top, #ba3b1d, #a22c11);
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ba3b1d), to(#a22c11));
         background: -moz-linear-gradient(center top, #ba3b1d, #a22c11);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ba3b1d', endColorstr='#a22c11');
       }
       .button:hover {
-        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(red), to(#a22c11));
+        background: linear-gradient(left top, #ff0000, #a22c11);
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ff0000), to(#a22c11));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0000', endColorstr='#a22c11');
       }
       .button.small {
         border-radius:5px;
         -moz-border-radius:5px;
       }
       #form {
+        background: linear-gradient(left top, #30445c, #555);
         background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#30445c), to(#555));
         background: -moz-linear-gradient(center top, #30445c, #555);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#30445c', endColorstr='#555');
       }
       #clock {
-        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#695e2e), to(#a49764));
+        background: linear-gradient(left top, #695e2e, #a49764);
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#695e2e), to(#a49764));
         background: -moz-linear-gradient(center top, #695e2e, #a49764);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#695e2e', endColorstr='#a49764');
       }
       .overlay {
         -webkit-mask-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.2)));	
@@ -338,6 +352,11 @@
                   <h3>Days</h3>
                   <div class="overlay">
                     <ol id="days">
+                      <li class="digit digit_three">
+                        <ol class="numbers">
+                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                        </ol>
+                      </li>
                       <li class="digit digit_two">
                         <ol class="numbers">
                           <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
@@ -429,9 +448,6 @@
               db = localStorage,
               clock = null,
               load = new Load();
-            
-          var sample_date = new Date();
-          $('#date').attr('placeholder', "October 17, 2010 13:00");
 
           if(db.sound == undefined)
             db.sound = "1";
@@ -504,6 +520,8 @@
                 if($.urlParam('title') != null) {
                   $('#title').val($.urlParam('title'));
                   $('#date').val($.urlParam('date'));
+                } else {
+                  $('#date').attr('placeholder', "November 5, 2010 13:00");
                 }
                 $('.date_info').show();
                 $('.date_error').hide();
@@ -627,9 +645,32 @@
                 var time = time.toString();
                   
                 if(previousTime != time) {
-                    previousTime = time;
-                    
-                  if(time.length == 2) {
+                  previousTime = time;
+
+                  if(time.length == 3) {
+                    digitThree = $('.digit_three .numbers', container);
+                    $(digitOne).animate({ top:-(time[0] * height) }, {
+                      complete:function() {
+                        if(time[0] * height == 0) {
+                          $(digitOne).css({ top: -(digitOneJump * height) });
+                        }
+                      }
+                    });
+                    $(digitTwo).animate({ top:-(time[1] * height) }, {
+                      complete:function() {
+                        if(time[1] * height == 0) {
+                          $(digitTwo).css({ top: -(10 * height) });
+                        }
+                      }
+                    });
+                    $(digitThree).animate({ top:-(time[2] * height) }, {
+                      complete:function() {
+                        if(time[2] * height == 0) {
+                          $(digitThree).css({ top: -(10 * height) });
+                        }
+                      }
+                    });
+                  } else if(time.length == 2) {
                     $(digitOne).animate({ top:-(time[0] * height) }, {
                       complete:function() {
                         if(time[0] * height == 0) {
