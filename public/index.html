@@ -52,7 +52,7 @@
         color:#FFF;
         opacity:0.5;
       }
-      form .date_error {
+      form .error {
         background:#f6e660;
         color:#222;
         text-shadow:none;
@@ -187,7 +187,7 @@
         border-left:6px solid #786d40;
         border-right:6px solid #786d40;
         margin:auto;
-        width:910px;
+        width:825px;
         margin-bottom:20px;
         margin-top:50px;
       }
@@ -331,7 +331,8 @@
               <p>The title of your countdown clock.</p>
               <input type="text" id="date" class="date" placeholder="Month, 19 2010 5:10pm"/>
               <p class="date_info">Your date will be parsed, be friendly!</p>
-              <p class="date_error">Don't know that date. Maybe try another one?</p>
+              <p class="parse_error error">Don't know that date. Maybe try another one?</p>
+              <p class="diff_error error">That is too far in the future! Max countdown is 99 days.</p>
               <input type="submit" id="load" class="button" value="Start" />
               <p id="previous" class="previous">Psst! <strong id="previous_clock"></strong> is still running. <a href="#" id="resume" class="button small">Resume</a></p>
             </form>
@@ -352,11 +353,6 @@
                   <h3>Days</h3>
                   <div class="overlay">
                     <ol id="days">
-                      <li class="digit digit_three">
-                        <ol class="numbers">
-                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
-                        </ol>
-                      </li>
                       <li class="digit digit_two">
                         <ol class="numbers">
                           <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
@@ -437,6 +433,7 @@
     </div>
     <div class="scripts">
       <script src="javascripts/jquery.js"></script>
+      <script src="javascripts/tested.js"></script>
       <script>
         (function($) {
           $.urlParam = function(name){
@@ -460,13 +457,10 @@
             ev.preventDefault();
             var title = $('#title').val() || $('#title').attr('placeholder');
             var date = $('#date').val() || $('#date').attr('placeholder');
-            if(new Date(date) == 'Invalid Date') {
-              $('.date_info').hide();
-              $('.date_error').show();
-            } else {
+            
+            if(new DateValidator(date).validate()) {
               load.clock(title, date);
             }
-            
           });
           
           $('#resume').click(function(ev) {
@@ -524,7 +518,7 @@
                   $('#date').attr('placeholder', "November 5, 2010 13:00");
                 }
                 $('.date_info').show();
-                $('.date_error').hide();
+                $('.error').hide();
                 if(db.title != undefined) {
                   $('#previous_clock').text(db.title);
                   $('#previous').show();
@@ -536,177 +530,8 @@
               }
             }
           }
-          
-          function Clock(title, date) {
-            var clockInterval, flasherInterval;
-
-            db.date = date;
-            db.title = title;
-            
-            $('#seconds .digit_two .numbers').addClass('red');
-
-            var endDate = new Date(date);
-
-            var dM = new Mover($('#days'), 'days'),
-                hM = new Mover($('#hours'), 'hours'),
-                mM = new Mover($('#minutes'), 'minutes'),
-                sM = new Mover($('#seconds'), 'seconds'),
-                d, h, m, s;
-
-            return {
-              start: function() {
-                clockInterval = setInterval(function() {
-                  var diff = Math.ceil(endDate.getTime() - new Date().getTime());
-                  
-                  d = Math.floor(diff / (1000 * 60 * 60 * 24)); 
-                  diff -= d * (1000 * 60 * 60 * 24);
-
-                  h = Math.floor(diff / (1000 * 60 * 60)); 
-                  diff -= h * (1000 * 60 * 60);
-
-                  m = Math.floor(diff / (1000 * 60)); 
-                  diff -= m * (1000 * 60);
-
-                  s = Math.floor(diff / 1000);
-                  diff -= s * 1000;
-
-                  if(d < 0 || h < 0 || m < 0 || s < 0) {
-                    flasherInterval = new Flasher(d, h, m, s).flashAll();
-                    audio.pause();
-                    clock.stop();
-                  } else {
-                    dM.move(d);
-                    hM.move(h);
-                    mM.move(m);
-                    sM.move(s);
-
-                    if(db.sound == "1") {
-                      audio.play();
-                    }
-
-                    new Flasher(d, h, m, s).flashIfNeeded();
-                  }
-                }, 1000);
-              },
-              stop: function() {
-                clearInterval(clockInterval);
-                audio.pause();
-              },
-              reset: function() {
-                $('.numbers').animate({top:0});
-                clearInterval(flasherInterval);
-              }
-            }
-          }
-  			  
-          function Flasher(d, h, m, s) {
-            var s = s.toString(),
-                m = m.toString(),
-                h = h.toString(),
-                d = d.toString();
-                
-            return {
-              flashIfNeeded: function() {
-                // Todo: Optimize
-                if(h == 0 && m == 0 && s < 3) {
-                  $('#seconds .digit_one .numbers, #minutes .numbers, #hours .numbers, #days .numbers').toggleClass('red');
-                } else if(m == 0 && s < 3) {
-                  $('#seconds .digit_one .numbers, #minutes .numbers, #hours .numbers').toggleClass('red');
-                } else if(s < 3) {
-                  $('#seconds .digit_one .numbers, #minutes .numbers').toggleClass('red');
-                } else if(s[1] < 3) {
-                  $('#seconds .digit_one .numbers').toggleClass('red');
-                } else {
-                  $('#seconds .digit_one .numbers, #minutes .numbers, #hours .numbers, #days .numbers').removeClass('red');
-                }
-              },
-              flashAll: function() {
-                $('.numbers').removeClass('red');
-                return setInterval(function() {
-                  $('.numbers').toggleClass('red');
-                }, 1000);
-              }
-            };
-          }
-  			  
-  			  function Mover(container, unit) {
-            var previousTime = null,
-                height = $('.numbers li').height(),
-                digitOne = $('.digit_one .numbers', container),
-                digitTwo = $('.digit_two .numbers', container),
-                digitOneJump = 6;  
-                
-            if(unit == 'days') {
-              digitOneJump = 10;
-            }
-
-            return {
-              move: function(time) {
-                var time = time.toString();
-                  
-                if(previousTime != time) {
-                  previousTime = time;
-
-                  if(time.length == 3) {
-                    digitThree = $('.digit_three .numbers', container);
-                    $(digitOne).animate({ top:-(time[0] * height) }, {
-                      complete:function() {
-                        if(time[0] * height == 0) {
-                          $(digitOne).css({ top: -(digitOneJump * height) });
-                        }
-                      }
-                    });
-                    $(digitTwo).animate({ top:-(time[1] * height) }, {
-                      complete:function() {
-                        if(time[1] * height == 0) {
-                          $(digitTwo).css({ top: -(10 * height) });
-                        }
-                      }
-                    });
-                    $(digitThree).animate({ top:-(time[2] * height) }, {
-                      complete:function() {
-                        if(time[2] * height == 0) {
-                          $(digitThree).css({ top: -(10 * height) });
-                        }
-                      }
-                    });
-                  } else if(time.length == 2) {
-                    $(digitOne).animate({ top:-(time[0] * height) }, {
-                      complete:function() {
-                        if(time[0] * height == 0) {
-                          $(digitOne).css({ top: -(digitOneJump * height) });
-                        }
-                      }
-                    });
-                    $(digitTwo).animate({ top:-(time[1] * height) }, {
-                      complete:function() {
-                        if(time[1] * height == 0) {
-                          $(digitTwo).css({ top: -(10 * height) });
-                        }
-                      }
-                    });
-                  } else {
-                    $(digitOne).animate({ top:0 }, {
-                      complete:function() {
-                        if(time * height == 0) {
-                          $(digitOne).css({ top: -(digitOneJump * height) });
-                        }
-                      }
-                    });
-                    $(digitTwo).animate({ top:-(time * height) }, {
-                      complete:function() {
-                        if(time * height == 0) {
-                          $(digitTwo).css({ top: -(10 * height) });
-                        }
-                      }
-                    });
-                  }
-                }
-              }
-            }
-  			  }
-				})($);
-			</script>
-		</div>
-	</body>
+        })($);
+      </script>
+    </div>
+  </body>
 </html>

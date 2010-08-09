@@ -1,14 +1,13 @@
 require 'growl'
 
-watch( 'javascripts/.*\.js' )  {|md| run }
-watch( 'public/javascript.*\.js' )  {|md| run }
+watch( 'javascripts/.*_spec.js' )  {|md| run }
+watch( 'public/javascripts/.*.js' )  {|md| run }
 
 def run
   # TODO: this does double work, bad. 
   system('rake jasmine:headless')
   result = `rake jasmine:headless`
-  
-  growl result rescue nil
+  growl result
 end
 
 def growl(message)
