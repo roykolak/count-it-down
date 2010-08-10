@@ -124,15 +124,10 @@
       <script src="javascripts/tested.js"></script>
       <script>
         (function($) {
-          $.urlParam = function(name){
-            var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
-            return (results != null ? unescape(results[1]) : null);
-          }
-
            audio = document.getElementsByTagName("audio")[0],
               db = localStorage,
               clock = null,
-              load = new Load();
+              load = new Loader();
 
           if(db.sound == undefined)
             db.sound = "1";
@@ -172,50 +167,6 @@
             db.sound = (db.sound == "1" ? "0" : "1");
             if(db.sound == "0") {
               audio.pause();
-            }
-          }
-          
-          function Load() {
-            return {
-              clock: function(title, date, duration_override) {
-                var duration = 500;
-                if(typeof(duration_override) != 'undefined') {
-                  duration = duration_override;
-                }
-                $('#end_date').text(date.toLocaleString());
-                $('#clock_title').text(title);
-                var url = window.location.href.replace(window.location.search, '') + '?title=' + title + '&date=' + date;
-                $('#url').text(url).attr('href', url);
-
-                $('#sections').animate({top: -$('.section').height() }, {
-                  duration:duration,
-                  complete: function() {
-                    clock = new Clock(title, date);
-                    clock.start();
-                  }
-                });
-              },
-              form: function() {
-                $('#form').css({ visibility: 'visible' });
-                $('#sections').animate({top:0 });
-                $('input[type=text]').val('');
-                if($.urlParam('title') != null) {
-                  $('#title').val($.urlParam('title'));
-                  $('#date').val($.urlParam('date'));
-                } else {
-                  $('#date').attr('placeholder', "November 5, 2010 13:00");
-                }
-                $('.date_info').show();
-                $('.error').hide();
-                if(db.title != undefined) {
-                  $('#previous_clock').text(db.title);
-                  $('#previous').show();
-                } else {
-                  $('#previous').hide();
-                }
-                clock.stop()
-                clock.reset();
-              }
             }
           }
         })($);

@@ -1,3 +1,8 @@
+$.urlParam = function(name){
+  var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+  return (results != null ? unescape(results[1]) : null);
+}
+
 function DateDifference(date) {
   return { 
     between: function(dateToDiff) {
@@ -181,8 +186,61 @@ function Clock(date, title) {
       //audio.pause();
     },
     reset: function() {
+      this.stop();
       $('.numbers').animate({top:0});
       clearInterval(flasherInterval);
+    }
+  };
+}
+
+function Loader() {
+  function populateInputs(titleFromUrl) {
+    if(titleFromUrl != null) {
+      $('#title').val($.urlParam('title'));
+      $('#date').val($.urlParam('date'));
+    } else {
+      $('#date').attr('placeholder', 'November 5, 2010 13:00');
+    }
+  }
+  
+  function showPreviousClock(storedTitle) {
+    if(storedTitle != undefined) {
+      $('#previous_clock').text(db.title);
+      $('#previous').show();
+    } else {
+      $('#previous').hide();
+    }
+  }
+  
+  function resetClock() {
+    if(clock != null) {
+      clock.reset();
+    }    
+  }
+  
+  return {
+    clock: function(title, date) {
+      $('#end_date').text(date.toLocaleString());
+      $('#clock_title').text(title);
+      
+      var url = window.location.href.replace(window.location.search, '') + '?title=' + title + '&date=' + date;
+      $('#url').text(url);
+      $('#url').attr('href', url);
+      
+      $('#sections').animate({top: -$('.section').height() }, function() {
+        clock = new Clock(title, date);
+        clock.start();
+      });
+    },
+    form: function() {
+      $('input[type=text]').val('');
+      $('#sections').animate({top:0 });
+      $('.date_info').show();
+      $('.error').hide();
+      
+      populateInputs($.urlParam('title'));
+      showPreviousClock(db.title);
+      resetClock();
     }
   };
 }
