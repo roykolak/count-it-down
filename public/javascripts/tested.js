@@ -76,10 +76,16 @@ function DateValidator(date, currentDate) {
       date = new Date(date);
       var diff = new DateDifference(date).between(new Date());
 
+      $('.date_info, .error').hide();
+
       if(date == 'Invalid Date') {
         valid = false;
+        $('.parse_error').fadeIn();
       } else if(diff.days > 99){
         valid = false;
+        $('.diff_error').fadeIn();
+      } else {
+        $('.date_info').fadeIn();
       }
 
       return valid;

@@ -27,6 +27,5 @@ describe("DateDifference", function() {
     it("returns the second difference", function() {
       expect(difference.seconds).toEqual(15);
     });
-
   });
 });
