@@ -122,55 +122,6 @@
     <div class="scripts">
       <script src="javascripts/jquery.js"></script>
       <script src="javascripts/tested.js"></script>
-      <script>
-        (function($) {
-           audio = document.getElementsByTagName("audio")[0],
-              db = localStorage,
-              clock = null,
-              load = new Loader();
-
-          if(db.sound == undefined)
-            db.sound = "1";
-
-          $('.wrapper').css({ paddingTop:$(window).height() / 4 });
-          $('.section, #frame').height($(window).height());
-
-
-          $('#load').click(function(ev) {
-            ev.preventDefault();
-            var title = $('#title').val() || $('#title').attr('placeholder');
-            var date = $('#date').val() || $('#date').attr('placeholder');
-            
-            if(new DateValidator(date).validate()) {
-              load.clock(title, date);
-            }
-          });
-          
-          $('#resume').click(function(ev) {
-            ev.preventDefault();
-            load.clock(db.title, db.date);
-          });
-
-          $('#back').click(function(ev) {
-            ev.preventDefault();
-            load.form();
-          });
-
-          $('#toggle_sound').click(function(ev) {
-            ev.preventDefault();
-            toggleSound();
-          });
-           
-          load.form();
-          
-          function toggleSound() {
-            db.sound = (db.sound == "1" ? "0" : "1");
-            if(db.sound == "0") {
-              audio.pause();
-            }
-          }
-        })($);
-      </script>
     </div>
   </body>
 </html>

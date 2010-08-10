@@ -4,7 +4,7 @@ $.urlParam = function(name){
 }
 
 function DateDifference(date) {
-  return { 
+  return {
     between: function(dateToDiff) {
       var diff = Math.ceil(date.getTime() - dateToDiff.getTime());
 
@@ -118,17 +118,17 @@ function Mover(container, unit) {
         var self = this; 
         if(time.length == 2) {
           $(digitOne).animate({ top:-(time[0] * this.height) }, function() {
-            self.callback(time[0], self.height, 10).call(this);
+            self.callback.call(this, time[0], self.height, 10);
           });
           $(digitTwo).animate({ top:-(time[1] * this.height) }, function() {
-            self.callback(time[1], self.height, 10).call(this);
+            self.callback.call(this, time[1], self.height, 10);
           });
         } else {
           $(digitOne).animate({ top:0 }, function() {
-            self.callback(0, self.height, 10).call(this);
+            self.callback.call(this, 0, self.height, 10);
           });
           $(digitTwo).animate({ top:-(time * this.height) }, function() {
-            self.callback(time, self.height, 10).call(this);
+            self.callback.call(this, time, self.height, 10);
           });
         }
       }
@@ -141,14 +141,14 @@ function Mover(container, unit) {
   };
 }
 
-function Clock(date, title) {
+function Clock(title, date) {
   var dateDifference = new DateDifference(new Date(date)),
       clockInterval, 
       flasherInterval;
-  
-  db.date = date;
-  db.title = title;
-  
+
+  localStorage.date = date;
+  localStorage.title = title;
+
   $('#seconds .digit_two .numbers').addClass('red');
   
   var dayMover = new Mover($('#days'), 'days'),
@@ -162,7 +162,7 @@ function Clock(date, title) {
     start: function() {
       clockInterval = setInterval(function() {
         var diff = dateDifference.between(new Date());
-        
+
         if(diff.days < 0 || diff.hours < 0 || diff.minutes < 0 || diff.seconds < 0) {
           flasherInterval = new Flasher(diff.days, diff.hours, diff.minutes, diff.seconds).flashAll();
           audio.pause();
@@ -173,7 +173,7 @@ function Clock(date, title) {
           minuteMover.move(diff.minutes);
           secondMover.move(diff.seconds);
         
-          if(db.sound == "1") {
+          if(localStorage.sound == "1") {
             audio.play();
           }
         
@@ -183,7 +183,7 @@ function Clock(date, title) {
     },
     stop: function() {
       clearInterval(clockInterval);
-      //audio.pause();
+      audio.pause();
     },
     reset: function() {
       this.stop();
@@ -194,6 +194,9 @@ function Clock(date, title) {
 }
 
 function Loader() {
+  $('.wrapper').css({ paddingTop:$(window).height() / 4 });
+  $('.section, #frame').height($(window).height());
+  
   function populateInputs(titleFromUrl) {
     if(titleFromUrl != null) {
       $('#title').val($.urlParam('title'));
@@ -205,7 +208,7 @@ function Loader() {
   
   function showPreviousClock(storedTitle) {
     if(storedTitle != undefined) {
-      $('#previous_clock').text(db.title);
+      $('#previous_clock').text(localStorage.title);
       $('#previous').show();
     } else {
       $('#previous').hide();
@@ -239,8 +242,67 @@ function Loader() {
       $('.error').hide();
       
       populateInputs($.urlParam('title'));
-      showPreviousClock(db.title);
+      showPreviousClock(localStorage.title);
       resetClock();
     }
   };
 }
+
+function SoundToggler() {
+  var onText = 'Sound On',
+      offText = 'Sound Off';
+  
+  if(localStorage.sound == undefined) {
+    localStorage.sound = "1";
+  }
+  
+  var text = (localStorage.sound == '1' ? offText : onText);
+  $('#toggle_sound').text(text);
+  
+  return {
+    toggle: function () {
+      if(localStorage.sound == "1") {
+        localStorage.sound = "0";
+        $('#toggle_sound').text(onText);
+        audio.pause();
+      } else {
+        localStorage.sound = "1";
+        $('#toggle_sound').text(offText);
+      }
+    }
+  }
+}
+
+(function($) {
+  audio = document.getElementsByTagName("audio")[0],
+  clock = null,
+  loader = new Loader(),
+  soundToggler = new SoundToggler();
+
+  $('#load').click(function(ev) {
+    ev.preventDefault();
+    var title = $('#title').val() || $('#title').attr('placeholder');
+    var date = $('#date').val() || $('#date').attr('placeholder');
+    
+    if(new DateValidator(date).validate()) {
+      loader.clock(title, date);
+    }
+  });
+  
+  $('#resume').click(function(ev) {
+    ev.preventDefault();
+    loader.clock(localStorage.title, localStorage.date);
+  });
+
+  $('#back').click(function(ev) {
+    ev.preventDefault();
+    loader.form();
+  });
+
+  $('#toggle_sound').click(function(ev) {
+    ev.preventDefault();
+    soundToggler.toggle();
+  });
+   
+  loader.form();
+})($);

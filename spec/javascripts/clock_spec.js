@@ -4,9 +4,9 @@ describe("Clock", function() {
       clock;
       
   beforeEach(function() {
-    db = {};
+    localStorage = {};
     spyOn($.fn, 'addClass');
-    clock = new Clock(date, title);
+    clock = new Clock(title, date);
   });
   
   describe("#initialize", function() {
@@ -16,8 +16,8 @@ describe("Clock", function() {
     });
     
     it("stores the date and title in localStorage", function() {
-      expect(db.date).toEqual(date);
-      expect(db.title).toEqual(title);
+      expect(localStorage.date).toEqual(date);
+      expect(localStorage.title).toEqual(title);
     });
     
     it("adds the red class to the second digit in seconds", function() {
@@ -34,10 +34,21 @@ describe("Clock", function() {
   });
   
   describe("#stop", function() {
+    beforeEach(function() {
+      audio = {
+        pause: function() {}
+      };
+    });
     it("calls to clearInterval", function() {
       spyOn(window, 'clearInterval');
       clock.stop();
       expect(window.clearInterval).wasCalled();
+    });
+    
+    it("stops the audio", function() {
+      spyOn(audio, 'pause');
+      clock.stop();
+      expect(audio.pause).wasCalled();
     });
   });
   

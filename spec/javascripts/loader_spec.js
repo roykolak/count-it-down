@@ -1,4 +1,19 @@
 describe("Loader", function() {
+  describe("#initialize", function() {
+    beforeEach(function() {
+      spyOn($.fn, 'height').andReturn(400);
+      spyOn($.fn, 'css');
+      new Loader();      
+    });
+    it("dynamically sets the padding top for the section wrapper based on window size", function() {
+      expect($.fn.css).wasCalledWith({ paddingTop: 100 });
+    });
+    
+    it("dynamically sets the height of the sections and frame", function() {
+      expect($.fn.height).wasCalledWith(400);
+    });
+  });
+  
   describe("#form", function() {
     beforeEach(function() {
       clock = null; // yuck.
@@ -24,8 +39,8 @@ describe("Loader", function() {
       expect($.fn.attr).wasCalledWith('placeholder', 'November 5, 2010 13:00');
     });
     
-    it("populates the previous clock ui when there is a saved title in the localStorage db", function() {
-      db.title = 'test';
+    it("populates the previous clock ui when there is a saved title in the localStorage localStorage", function() {
+      localStorage.title = 'test';
       spyOn($.fn, 'text');
       spyOn($.fn, 'show');
       new Loader().form();
@@ -33,8 +48,8 @@ describe("Loader", function() {
       expect($.fn.show).wasCalled();
     });
     
-    it("hides the previous clock when there is no stored title in localStorage db", function() {
-      db.title = null;
+    it("hides the previous clock when there is no stored title in localStorage localStorage", function() {
+      localStorage.title = null;
       spyOn($.fn, 'hide');
       new Loader().form();
       expect($.fn.hide).wasCalled();
