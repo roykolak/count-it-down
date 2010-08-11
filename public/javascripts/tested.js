@@ -102,7 +102,22 @@ function Mover(container, unit) {
   var previousTime = null,
       height = $('.numbers li').height(),
       digitOne = $('.digit_one .numbers', container),
-      digitTwo = $('.digit_two .numbers', container);
+      digitTwo = $('.digit_two .numbers', container),
+      firstDigitCount, secondDigitCount;
+      
+  if(unit == 'days') {
+    firstDigitCount = 10;
+    secondDigitCount = 10;
+  } else if(unit == 'hours') {
+    firstDigitCount = 3;
+    secondDigitCount = 10;
+  } else {
+    firstDigitCount = 6;
+    secondDigitCount = 10;
+  }
+
+  digitOneJumped = false;
+  digitTwoJumped = false;
 
   return {
     container: container,
@@ -112,24 +127,45 @@ function Mover(container, unit) {
     
     move: function(time) {
       var time = time.toString();
-        
+      
       if(this.previousTime != time) {
         this.previousTime = time;
         var self = this; 
         if(time.length == 2) {
+          digitOneJumped = false;
+          digitTwoJumped = false;
+          
           $(digitOne).animate({ top:-(time[0] * this.height) }, function() {
-            self.callback.call(this, time[0], self.height, 10);
+            self.callback.call(this, time[0], self.height, firstDigitCount);
           });
           $(digitTwo).animate({ top:-(time[1] * this.height) }, function() {
-            self.callback.call(this, time[1], self.height, 10);
+            self.callback.call(this, time[1], self.height, secondDigitCount);
+          });
+        } else if(time.length == 1) {
+          digitTwoJumped = false;
+
+          if(digitOneJumped != true) {
+            $(digitOne).animate({ top:0 }, function() {
+              self.callback.call(this, 0, self.height, firstDigitCount);
+              digitOneJumped = true;
+            });
+          }
+          $(digitTwo).animate({ top:-(time * this.height) }, function() {
+            self.callback.call(this, time, self.height, secondDigitCount);
           });
         } else {
-          $(digitOne).animate({ top:0 }, function() {
-            self.callback.call(this, 0, self.height, 10);
-          });
-          $(digitTwo).animate({ top:-(time * this.height) }, function() {
-            self.callback.call(this, time, self.height, 10);
-          });
+          if(digitOneJumped != true) {
+            $(digitOne).animate({ top:0 }, function() {
+              self.callback.call(this, 0, self.height, firstDigitCount);
+              digitOneJumped = true;
+            });
+          }
+          if(digitTwoJumped != true) {
+            $(digitTwo).animate({ top:-(time * this.height) }, function() {
+              self.callback.call(this, time, self.height, secondDigitCount);
+              digitTwoJumped = true;
+            });
+          }
         }
       }
     },
