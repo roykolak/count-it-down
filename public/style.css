@@ -28,28 +28,9 @@ ol li li {
   background:#231F20;
   position:relative;
 }
-p {
-  color:#292c2c;
-  font-size:15px;
-  position:relative;
-  text-shadow:0px 1px 0px #000;
-}
 form {
   width:700px;
   margin:auto;
-}
-form p {
-  margin-top:-35px;
-  padding:20px 0 5px;
-  z-index:1;
-  position:relative;
-  color:#FFF;
-  opacity:0.5;
-}
-form .error {
-  background:#f6e660;
-  color:#222;
-  text-shadow:none;
 }
 input[type=text]:hover {
   background:#eee;
@@ -74,19 +55,33 @@ input.date {
 .section, .sections {
   position:relative;
 }
+.clear { 
+	clear:both;
+	height:0;
+	font-size:0;
+}
 
 
-
-
-/* Clock Form */      
+/* Clock Form */
 .previous {
   background:#333;
   color:#FFF;
-  padding:15px;
+  padding:13px;
   color:#CCC;
   margin:auto;
   opacity:1;
 }
+.previous p {
+	margin:0;
+	float:left;
+	margin-top:4px;
+}
+.previous a {
+	float:right;
+	margin-top:0;
+}
+
+
 #previous_clock {
   color:#ba3b1d;
 }
@@ -112,6 +107,21 @@ input.date {
 #form form {
   width:450px;
   float:right;
+}
+.error {
+  background:#f6e660;
+  color:#222;
+  text-shadow:none;
+}
+.hint {
+  font-size:15px;
+  text-shadow:0px 1px 0px #000;
+  margin-top:-35px;
+  padding:20px 0 5px;
+  z-index:1;
+  position:relative;
+  color:#FFF;
+  opacity:0.5;
 }
 .button {
   color:#f5baba;
@@ -148,7 +158,6 @@ input.date {
 }
 .numbers {
   width:83px;
-  color:#CCC;
   background:#000;
 }
 .numbers li {
@@ -159,7 +168,7 @@ input.date {
 }
 .colon, .numbers {
   border-right:1px solid #333;
-  border-right:1px solid #333;
+	color:#CCC;
 }
 .red {
   color:#e63333;
@@ -173,7 +182,7 @@ input.date {
 .unit h3 {
   text-align:right;
   position:absolute;
-  top:-30px;        
+  top:-30px;
 }
 .clock {
   border-top:6px solid #433b19;
@@ -253,58 +262,6 @@ input.date {
   font-weight:bold;
   color:#222;
 }
-
-
-
-form p {
-  background: linear-gradient(left top, #343f56, #888);
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#343f56), to(#888));
-  background: -moz-linear-gradient(center top, #343f56, #888);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#343f56', endColorstr='#888');
-  
-  border-radius:4px;
-  -moz-border-radius:4px;
-}
-p.previous {
-  border-radius:10px;
-  -moz-border-radius:10px;
-}
-input {
-  background: linear-gradient(left top, #bbb, #eee);
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#bbb), to(#eee));
-  background: -moz-linear-gradient(center top, #bbb, #eee);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bbb', endColorstr='#eee');
-  
-  border-radius:7px;
-  -moz-border-radius:7px;
-}
-.button {
-  background: linear-gradient(left top, #ba3b1d, #a22c11);
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ba3b1d), to(#a22c11));
-  background: -moz-linear-gradient(center top, #ba3b1d, #a22c11);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ba3b1d', endColorstr='#a22c11');
-}
-.button:hover {
-  background: linear-gradient(left top, #ff0000, #a22c11);
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ff0000), to(#a22c11));
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0000', endColorstr='#a22c11');
-}
-.button.small {
-  border-radius:5px;
-  -moz-border-radius:5px;
-}
-#form {
-  background: linear-gradient(left top, #30445c, #555);
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#30445c), to(#555));
-  background: -moz-linear-gradient(center top, #30445c, #555);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#30445c', endColorstr='#555');
-}
-#clock {
-  background: linear-gradient(left top, #695e2e, #a49764);
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#695e2e), to(#a49764));
-  background: -moz-linear-gradient(center top, #695e2e, #a49764);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#695e2e', endColorstr='#a49764');
-}
 .overlay {
-  -webkit-mask-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.2)));	
+  -webkit-mask-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.2)));
 }

@@ -272,8 +272,33 @@ function SoundToggler() {
     }
   }
 }
+ 
+function gradient(element, from, to) {
+  $(element).css('background', 'linear-gradient(left top, ' + from + ', ' + to + ')');
+  $(element).css('background', '-webkit-gradient(linear, 0% 0%, 0% 100%, from(' + from + '), to(' + to + '))');
+  $(element).css('background', '-moz-linear-gradient(center top, ' + from + ', ' + to + ')');
+  $(element).css('filter', "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + from + "', endColorstr='" + to + "')");
+}
+
+function borderRadius(element, value) {
+  $(element).css('border-radius', value);
+  $(element).css('-moz-border-radius', value);
+}
 
 (function($) {
+  
+  gradient('.hint', '#343f56', '#888');
+  gradient('input[type=text]', '#BBB', '#EEE');
+  gradient('.button', '#ba3b1d', '#a22c11');
+  gradient('.button:hover', '#ff0000', '#a22c11');
+  gradient('#form', '#30445c', '#555');
+  gradient('#clock', '#695e2e', '#a49764');
+  
+  borderRadius('.hint', '4px');
+  borderRadius('.previous', '10px');
+  borderRadius('input', '7px');
+  borderRadius('.button.small', '5px');
+  
   audio = document.getElementsByTagName("audio")[0],
   clock = null,
   loader = new Loader(),

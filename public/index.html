@@ -16,13 +16,17 @@
             </div>
             <form>
               <input type="text" id="title" placeholder="Clock title" />
-              <p>The title of your countdown clock.</p>
-              <input type="text" id="date" class="date" placeholder="Month, 19 2010 5:10pm"/>
-              <p class="date_info">Your date will be parsed, be friendly!</p>
-              <p class="parse_error error">Don't know that date. Maybe try another one?</p>
-              <p class="diff_error error">That is too far in the future! Max countdown is 99 days.</p>
+              <p class="hint">The title of your countdown clock.</p>
+              <input type="text" id="date" class="date" />
+              <p class="hint date_info">Your date will be parsed, be friendly!</p>
+              <p class="hint parse_error error">Don't know that date. Maybe try another one?</p>
+              <p class="hint diff_error error">That is too far in the future! Max countdown is 99 days.</p>
               <input type="submit" id="load" class="button" value="Start" />
-              <p id="previous" class="previous">Psst! <strong id="previous_clock"></strong> is still running. <a href="#" id="resume" class="button small">Resume</a></p>
+              <div id="previous" class="previous">
+                <p>Psst! <strong id="previous_clock"></strong> is still running.</p>
+                <a href="#" id="resume" class="button small">Resume</a>
+                <div class="clear"></div>
+              </div>
             </form>
             <div style="clear:both"></div>
           </div>
@@ -54,7 +58,9 @@
                     </ol>
                   </div>
                 </div>
-                <div class="colon">:</div>
+                <div class="colon">
+                  <div class="overlay">:</div>
+                </div>
                 <div class="unit">
                   <h3>Hours</h3>
                   <div class="overlay">
@@ -72,7 +78,9 @@
                     </ol>
                   </div>
                 </div>
-                <div class="colon">:</div>
+                <div class="colon">
+                  <div class="overlay">:</div>
+                </div>
                 <div class="unit">
                   <h3>Minutes</h3>
                   <div class="overlay">
@@ -90,7 +98,9 @@
                     </ol>
                   </div>
                 </div>
-                <div class="colon">:</div>
+                <div class="colon">
+                  <div class="overlay">:</div>
+                </div>
                 <div class="unit last">
                   <h3>Seconds</h3>
                   <div class="overlay">
@@ -119,9 +129,7 @@
         </div>
       </div>
     </div>
-    <div class="scripts">
-      <script src="javascripts/jquery.js"></script>
-      <script src="javascripts/tested.js"></script>
-    </div>
+    <script src="javascripts/jquery.js"></script>
+    <script src="javascripts/tested.js"></script>
   </body>
 </html>
