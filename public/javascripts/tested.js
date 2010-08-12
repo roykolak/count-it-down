@@ -370,7 +370,7 @@ function borderRadius(element, value) {
   });
   gradient('.button', '#ba3b1d', '#a22c11');
 
-  gradient('#form', '#30445c', '#555');
+  gradient('#f', '#30445c', '#555');
   gradient('#clock', '#695e2e', '#a49764');
   
   borderRadius('.hint', '4px');
