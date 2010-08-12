@@ -314,41 +314,41 @@ function SoundToggler() {
   }
 }
  
-function PlaceHolder(element) {
-  var placeholder = $(element).attr('placeholder');
+function PlaceHolder(e) {
+  var placeholder = $(e).attr('placeholder');
   
-  $(element).blur(function() {
-    if($(element).val() == '') {
-      $(element).val(placeholder);
-      $(element).addClass('placeholder');
+  $(e).blur(function() {
+    if($(e).val() == '') {
+      $(e).val(placeholder);
+      $(e).addClass('placeholder');
     }    
   });
   
-  $(element).focus(function() {
-    if($(element).val() == placeholder) {
-      $(element).removeClass('placeholder');
-      $(element).val('');
+  $(e).focus(function() {
+    if($(e).val() == placeholder) {
+      $(e).removeClass('placeholder');
+      $(e).val('');
     }
   });
   
-  if($(element).val() == '') {
-    $(element).addClass('placeholder');
-    $(element).val(placeholder);
+  if($(e).val() == '') {
+    $(e).addClass('placeholder');
+    $(e).val(placeholder);
   }
 }
  
-function g(element, from, to) {
-  $(element).css('background', 'linear-gradient(left top, ' + from + ', ' + to + ')');
-  $(element).css('background', '-webkit-gradient(linear, 0% 0%, 0% 100%, from(' + from + '), to(' + to + '))');
-  $(element).css('background', '-moz-linear-gradient(center top, ' + from + ', ' + to + ')');
+function g(e, from, to) {
+  $(e).css('background', 'linear-gradient(left top, ' + from + ', ' + to + ')');
+  $(e).css('background', '-webkit-gradient(linear, 0% 0%, 0% 100%, from(' + from + '), to(' + to + '))');
+  $(e).css('background', '-moz-linear-gradient(center top, ' + from + ', ' + to + ')');
   if($.browser.msie) {
-    $(element).css('background', from);
+    $(e).css('background', from);
   }
 }
 
-function br(element, value) {
-  $(element).css('border-radius', value);
-  $(element).css('-moz-border-radius', value);
+function br(e, value) {
+  $(e).css('border-radius', value);
+  $(e).css('-moz-border-radius', value);
 }
 
 (function($) { 
