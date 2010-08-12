@@ -337,7 +337,7 @@ function PlaceHolder(element) {
   }
 }
  
-function gradient(element, from, to) {
+function g(element, from, to) {
   $(element).css('background', 'linear-gradient(left top, ' + from + ', ' + to + ')');
   $(element).css('background', '-webkit-gradient(linear, 0% 0%, 0% 100%, from(' + from + '), to(' + to + '))');
   $(element).css('background', '-moz-linear-gradient(center top, ' + from + ', ' + to + ')');
@@ -352,26 +352,26 @@ function borderRadius(element, value) {
 }
 
 (function($) { 
-  gradient('.hint', '#6185af', '#30445c');
-  gradient('p.error', '#b666b9', '#5a305c');
+  g('.hint', '#6185af', '#30445c');
+  g('p.error', '#b666b9', '#5a305c');
   
   $('input[type=text]').hover(function() {
     $(this).css('background', '#eee');
   }, function() {
-    gradient(this, '#BBB', '#EEE');
+    g(this, '#BBB', '#EEE');
   });
   
-  gradient('input[type=text]', '#BBB', '#EEE');
+  g('input[type=text]', '#BBB', '#EEE');
   
   $('.b').hover(function() {
-    gradient(this, '#ff0000', '#a22c11');
+    g(this, '#ff0000', '#a22c11');
   }, function() {
-    gradient(this, '#ba3b1d', '#a22c11');
+    g(this, '#ba3b1d', '#a22c11');
   });
-  gradient('.b', '#ba3b1d', '#a22c11');
+  g('.b', '#ba3b1d', '#a22c11');
 
-  gradient('#f', '#30445c', '#555');
-  gradient('#clock', '#695e2e', '#a49764');
+  g('#f', '#30445c', '#555');
+  g('#clock', '#695e2e', '#a49764');
   
   borderRadius('.hint', '4px');
   borderRadius('.p', '10px');
