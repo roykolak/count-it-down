@@ -179,12 +179,12 @@ p.error {
   color:#e63333;
 }
 .colon,
-.unit {
+.u {
   float:left;
   position:relative;
   background:#000;
 }
-.unit h3 {
+.u h3 {
   text-align:right;
   position:absolute;
   top:-30px;
