@@ -43,10 +43,10 @@ describe("Loader", function() {
     
     it("populates the previous clock ui when there is a saved title in localStorage", function() {
       db.title = 'test';
-      spyOn($.fn, 'text');
+      var textSpy = spyOn($.fn, 'x');
       spyOn($.fn, 'show');
       new L().f();
-      expect($.fn.text).wasCalledWith('test');
+      expect(textSpy).wasCalledWith('test');
       expect($.fn.show).wasCalled();
     });
     
@@ -74,31 +74,28 @@ describe("Loader", function() {
   });
   
   describe("#clock", function() {
-    var date, title;
+    var date, title, textSpy;
     
     beforeEach(function() {
       date = new Date('november 5, 2010');
       title = 'clock title';
+      textSpy = spyOn($.fn, 'x');
     });
 
     it("sets the end date to the (formatted) passed date value", function() {
-      spyOn($.fn, 'text');
-      
       new L().c(title, date);
-      expect($.fn.text).wasCalledWith(date.toLocaleString());
+      expect(textSpy).wasCalledWith(date.toLocaleString());
     });
     
     it("sets the title to the passed title", function() {
-      spyOn($.fn, 'text');
       new L().c(title, date);
-      expect($.fn.text).wasCalledWith(title);
+      expect(textSpy).wasCalledWith(title);
     });
     
     it("builds the share url with a title and a date", function() {
-      spyOn($.fn, 'text');
       var attrSpy = spyOn($.fn, 't');
       new L().c(title, date);
-      expect($.fn.text).wasCalledWith('about:blank?t=' + title + '&d=' + date);
+      expect(textSpy).wasCalledWith('about:blank?t=' + title + '&d=' + date);
       expect(attrSpy).wasCalledWith('href', 'about:blank?t=' + title + '&d=' + date);
     });
   });

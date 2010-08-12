@@ -228,15 +228,15 @@ p.error {
   right:5px;
   z-index:10;
   padding:4px 8px;
-  background:#000;
-  color:#FFF;
+  background:#483d0c;
+  color:#cbbe83;
   border-bottom:1px solid #b1a679;
   border-right:1px solid #786d40;
   text-decoration:none;
 }
 #back:hover {
-  background:#CCC;
-  color:#000;
+  background:#cbbe83;
+  color:#483d0c;
 }
 .s {
   bottom:0px;

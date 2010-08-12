@@ -22,26 +22,26 @@ describe("Clock", function() {
   
   describe("#start", function() {
     it("calls to setInterval", function() {
-      spyOn(window, 'setInterval');
+      var setIntervalSpy = spyOn(window, 'sI');
       clock.start();
-      expect(window.setInterval).wasCalled();
+      expect(setIntervalSpy).wasCalled();
     });
   });
   
   describe("#stop", function() {
     it("calls to clearInterval", function() {
-      spyOn(window, 'clearInterval');
+      var clearIntervalSpy = spyOn(window, 'cI');
       clock.stop();
-      expect(window.clearInterval).wasCalled();
+      expect(clearIntervalSpy).wasCalled();
     });
   });
   
   describe("#reset", function() {
     it("calls to clearInterval and animates digits to all zeros", function() {
-      spyOn(window, 'clearInterval');
+      var clearIntervalSpy = spyOn(window, 'cI');
       var animateSpy = spyOn($.fn, 'a');
       clock.reset();
-      expect(window.clearInterval).wasCalled();
+      expect(clearIntervalSpy).wasCalled();
       expect(animateSpy).wasCalledWith({ top: 0 });
     });
   });

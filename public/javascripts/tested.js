@@ -9,13 +9,16 @@ $.fn.h = $.fn.hover;
 $.fn.rc = $.fn.removeClass;
 $.fn.ac = $.fn.addClass;
 $.fn.t = $.fn.attr;
+$.fn.x = $.fn.text;
 ie = $.browser.msie;
+sI = setInterval;
+cI = clearInterval;
 
 
 $.u = function(n){
   var r = new RegExp('[\\?&]' + n + '=([^&#]*)').exec(window.location.href);
   return (r != null ? unescape(r[1]) : null);
-}
+};
 
 function DD(t) {
   return {
@@ -67,7 +70,7 @@ function F(d, h, m, s) {
     },
     fa: function() {
       $('.n').rc('red');
-      return setInterval(function() {
+      return sI(function() {
         $('.n').toggleClass('red');
       }, 1000);
     }
@@ -193,7 +196,7 @@ function C(t, d) {
   
   return {
     start: function() {
-      ci = setInterval(function() {
+      ci = sI(function() {
         var f = dd.b(new Date());
 
         if(f.d < 0 || f.h < 0 || f.m < 0 || f.s < 0) {
@@ -210,12 +213,12 @@ function C(t, d) {
       }, 1000);
     },
     stop: function() {
-      clearInterval(ci);
+      cI(ci);
     },
     reset: function() {
       this.stop();
       $('.n').a({top:0});
-      clearInterval(fi);
+      cI(fi);
     }
   };
 }
@@ -235,7 +238,7 @@ function L() {
   
   function sP(s) {
     if(s != undefined) {
-      $('#previous_clock').text(db.title);
+      $('#previous_clock').x(db.title);
       $('#previous').show();
     } else {
       $('#previous').hide();
@@ -250,11 +253,11 @@ function L() {
   
   return {
     c: function(title, date) {
-      $('#end_date').text(date.toLocaleString());
-      $('#clock_title').text(title);
+      $('#end_date').x(date.toLocaleString());
+      $('#clock_title').x(title);
       
       var url = window.location.href.replace(window.location.search, '') + '?t=' + title + '&d=' + date;
-      $('#url').text(url);
+      $('#url').x(url);
       $('#url').t('href', url);
       
       $('#sections').a({top: -$('.section').height() }, function() {
@@ -346,7 +349,7 @@ function br(e, v) {
   br('input', '7px');
   br('.b.small', '5px');
   
-  k = null,
+  k = null;
   l = new L();
 
   l.f();
