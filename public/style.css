@@ -241,26 +241,26 @@ p.error {
   background:#CCC;
   color:#000;
 }
-.sharing {
+.s {
   bottom:0px;
   position:absolute;
   width:100%;
   background:#7d7244;
   padding:10px 10px 10px;
 }
-.sharing h4,
-.sharing .url {
+.s h4,
+.s .url {
   opacity:.8;
   font-size:12px;
 }
-.sharing .url:hover {
+.s .url:hover {
   opacity:1;
 }
-.sharing h4 { 
+.s h4 { 
   color:#000;
   font-size:14px;
 }
-.sharing .url {
+.s .url {
   background:#c8c1a2;
   padding:5px 9px;
   border-top:1px solid #eee9d1;
