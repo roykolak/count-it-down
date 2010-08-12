@@ -222,22 +222,19 @@ p.error {
   color:#000;
 }
 
-.c {
+#back {
   position:absolute;
   top:10px;
   right:5px;
   z-index:10;
-}
-.c a {
   padding:4px 8px;
   background:#000;
-  opacity:.4;
   color:#FFF;
   border-bottom:1px solid #b1a679;
-  border-left:1px solid #786d40;
+  border-right:1px solid #786d40;
   text-decoration:none;
 }
-.c a:hover {
+#back:hover {
   background:#CCC;
   color:#000;
 }

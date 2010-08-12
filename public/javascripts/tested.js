@@ -1,68 +1,72 @@
-$.urlParam = function(name){
-  var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
-  return (results != null ? unescape(results[1]) : null);
+db = localStorage;
+mf = Math.floor;
+
+$.fn.a = $.fn.animate;
+$.fn.c = $.fn.css;
+$.fn.cl = $.fn.click;
+$.fn.v = $.fn.val;
+$.fn.h = $.fn.hover;
+$.fn.rc = $.fn.removeClass;
+$.fn.ac = $.fn.addClass;
+$.fn.t = $.fn.attr;
+ie = $.browser.msie;
+
+
+$.u = function(n){
+  var r = new RegExp('[\\?&]' + n + '=([^&#]*)').exec(window.location.href);
+  return (r != null ? unescape(r[1]) : null);
 }
 
-function DateDifference(date) {
+function DD(t) {
   return {
-    between: function(dateToDiff) {
-      var diff = Math.ceil(date.getTime() - dateToDiff.getTime());
-
-      days = Math.floor(diff / (1000 * 60 * 60 * 24)); 
-      diff -= days * (1000 * 60 * 60 * 24);
-
-      hours = Math.floor(diff / (1000 * 60 * 60)); 
-      diff -= hours * (1000 * 60 * 60);
-
-      minutes = Math.floor(diff / (1000 * 60)); 
-      diff -= minutes * (1000 * 60);
-
-      seconds = Math.floor(diff / 1000);
-      
-      return {
-        days: days,
-        hours: hours,
-        minutes: minutes,
-        seconds: seconds
-      };
+    b: function(g) {
+      var e = Math.ceil(t.getTime() - g.getTime());
+      d = mf(e / (1000 * 60 * 60 * 24)); 
+      e -= d * (1000 * 60 * 60 * 24);
+      h = mf(e / (1000 * 60 * 60)); 
+      e -= h * (1000 * 60 * 60);
+      m = mf(e / (1000 * 60)); 
+      e -= m * (1000 * 60);
+      s = mf(e / 1000);      
+      return { d: d, h: h, m: m, s: s };
     }
   };
 };        
 
-function Flasher(d, h, m, s) {
+function F(d, h, m, s) {
   var s = s.toString(),
       m = m.toString(),
       h = h.toString(),
       d = d.toString();
       
-  function getSelector() {
-    var selector;
+  function gS() {
+    var se;
     
     if(h == 0 && m == 0 && s < 3) {
-      selector = '#seconds .digit_one .n, #minutes .n, #hours .n, #days .n';
+      se = '#s .digit_one .n, #m .n, #h .n, #d .n';
     } else if(m == 0 && s < 3) {
-      selector = '#seconds .digit_one .n, #minutes .n, #hours .n';
+      se = '#s .digit_one .n, #m .n, #h .n';
     } else if(s < 3) {
-      selector = '#seconds .digit_one .n, #minutes .n';
+      se = '#s .digit_one .n, #m .n';
     } else if(s[1] < 3) {
-      selector = '#seconds .digit_one .n';
+      se = '#s .digit_one .n';
     }
 
-    return selector;
+    return se;
   }
       
   return {
-    flashIfNeeded: function() {
-      var selector = getSelector();
+    fin: function() {
+      var s = gS();
 
-      if(typeof(selector) != 'undefined') {
-        $(selector).toggleClass('red');
+      if(typeof(s) != 'undefined') {
+        $(s).toggleClass('red');
       } else {
-        $('#seconds .digit_one .n, #minutes .n, #hours .n, #days .n').removeClass('red'); 
+        $('#s .digit_one .n, #m .n, #h .n, #d .n').rc('red'); 
       }
     },
-    flashAll: function() {
-      $('.n').removeClass('red');
+    fa: function() {
+      $('.n').rc('red');
       return setInterval(function() {
         $('.n').toggleClass('red');
       }, 1000);
@@ -70,300 +74,264 @@ function Flasher(d, h, m, s) {
   };
 }
 
-function DateValidator(date, currentDate) {
+function DV(d) {
   return {
-    date:date,
-    currentDate:currentDate,
-    
-    validate: function() {
-      var valid = true;
+    v: function() {
+      var v = true;
       
-      date = new Date(date);
-      var diff = new DateDifference(date).between(new Date());
+      d = new Date(d);
+      var diff = new DD(d).b(new Date());
 
       $('.date_info, .error').hide();
 
-      if(date == 'Invalid Date' || date == 'NaN') {
-        valid = false;
+      if(d == 'Invalid Date' || d == 'NaN') {
+        v = false;
         $('.parse_error').fadeIn();
-      } else if(diff.days > 99){
-        valid = false;
+      } else if(diff.d > 99){
+        v = false;
         $('.diff_error').fadeIn();
       } else {
         $('.date_info').fadeIn();
       }
 
-      return valid;
+      return v;
     }
   }; 
 }
 
-function Mover(container, unit) {
-  var previousTime = null,
-      height = $('.n li').height(),
-      digitOne = $('.digit_one .n', container),
-      digitTwo = $('.digit_two .n', container),
-      firstDigitCount, secondDigitCount;
+function M(c, u) {
+  var pT = null,
+      h = $('.n li').height(),
+      dO = $('.digit_one .n', c),
+      dT = $('.digit_two .n', c),
+      fD, sD;
       
-  if(unit == 'days') {
-    firstDigitCount = 10;
-    secondDigitCount = 10;
-  } else if(unit == 'hours') {
-    firstDigitCount = 3;
-    secondDigitCount = 10;
+  if(u == 'days') {
+    fD = 10;
+    sD = 10;
+  } else if(u == 'hours') {
+    fD = 3;
+    sD = 10;
   } else {
-    firstDigitCount = 6;
-    secondDigitCount = 10;
+    fD = 6;
+    sD = 10;
   }
 
-  digitOneJumped = false;
-  digitTwoJumped = false;
+  doj = false;
+  dtj = false;
 
   return {
-    container: container,
-    unit: unit,
-    height: height,
-    previousTime: previousTime,
+    h: h,
+    pT: pT,
     
-    move: function(time) {
-      var time = time.toString();
+    m: function(t) {
+      var t = t.toString();
       
-      if(this.previousTime != time) {
-        this.previousTime = time;
-        var self = this; 
-        if(time.length == 2) {
-          digitOneJumped = false;
-          digitTwoJumped = false;
+      if(this.pT != t) {
+        this.pT = t;
+        var s = this; 
+        if(t.length == 2) {
+          doj = false;
+          dtj = false;
           
-          $(digitOne).animate({ top:-(time[0] * this.height) }, function() {
-            self.callback.call(this, time[0], self.height, firstDigitCount);
+          $(dO).a({ top:-(t[0] * this.h) }, function() {
+            s.c.call(this, t[0], s.h, fD);
           });
-          $(digitTwo).animate({ top:-(time[1] * this.height) }, function() {
-            self.callback.call(this, time[1], self.height, secondDigitCount);
+          $(dT).a({ top:-(t[1] * this.h) }, function() {
+            s.c.call(this, t[1], s.h, sD);
           });
-        } else if(time.length == 1) {
-          digitTwoJumped = false;
+        } else if(t.length == 1) {
+          dtj = false;
 
-          if(digitOneJumped != true) {
-            $(digitOne).animate({ top:0 }, function() {
-              self.callback.call(this, 0, self.height, firstDigitCount);
-              digitOneJumped = true;
+          if(doj != true) {
+            $(dO).a({ top:0 }, function() {
+              s.c.call(this, 0, s.h, fD);
+              doj = true;
             });
           }
-          $(digitTwo).animate({ top:-(time * this.height) }, function() {
-            self.callback.call(this, time, self.height, secondDigitCount);
+          $(dT).a({ top:-(t * this.h) }, function() {
+            s.c.call(this, t, s.h, sD);
           });
         } else {
-          if(digitOneJumped != true) {
-            $(digitOne).animate({ top:0 }, function() {
-              self.callback.call(this, 0, self.height, firstDigitCount);
-              digitOneJumped = true;
+          if(doj != true) {
+            $(dO).a({ top:0 }, function() {
+              s.c.call(this, 0, s.h, fD);
+              doj = true;
             });
           }
-          if(digitTwoJumped != true) {
-            $(digitTwo).animate({ top:-(time * this.height) }, function() {
-              self.callback.call(this, time, self.height, secondDigitCount);
-              digitTwoJumped = true;
+          if(dtj != true) {
+            $(dT).a({ top:-(t * this.h) }, function() {
+              s.c.call(this, t, s.h, sD);
+              dtj = true;
             });
           }
         }
       }
     },
-    callback: function(digit, height, maxDigits) {
-      if(digit * height == 0) {
-        $(this).css({ top: -(maxDigits * height) });
+    c: function(d, h, m) {
+      if(d * h == 0) {
+        $(this).c({ top: -(m * h) });
       }
     }
   };
 }
 
-function Clock(title, date) {
-  var dateDifference = new DateDifference(new Date(date)),
-      clockInterval, 
-      flasherInterval;
+function C(t, d) {
+  var dd = new DD(new Date(d)),
+      ci, 
+      fi;
 
-  localStorage.date = date;
-  localStorage.title = title;
+  db.date = d;
+  db.title = t;
 
-  $('#seconds .p_two .n').addClass('red');
+  $('#s .p_two .n').ac('red');
   
-  var dayMover = new Mover($('#days'), 'days'),
-      hourMover = new Mover($('#hours'), 'hours'),
-      minuteMover = new Mover($('#minutes'), 'minutes'),
-      secondMover = new Mover($('#seconds'), 'seconds');
+  var dM = new M($('#d'), 'days'),
+      hM = new M($('#h'), 'hours'),
+      mM = new M($('#m'), 'minutes'),
+      sM = new M($('#s'), 'seconds');
   
   return {
-    date: date,
-    title: title,
     start: function() {
-      clockInterval = setInterval(function() {
-        var diff = dateDifference.between(new Date());
+      ci = setInterval(function() {
+        var f = dd.b(new Date());
 
-        if(diff.days < 0 || diff.hours < 0 || diff.minutes < 0 || diff.seconds < 0) {
-          flasherInterval = new Flasher(diff.days, diff.hours, diff.minutes, diff.seconds).flashAll();
-          audio.pause();
-          clock.stop();
+        if(f.d < 0 || f.h < 0 || f.m < 0 || f.s < 0) {
+          fi = new F(f.d, f.h, f.m, f.s).fa();
+          k.stop();
         } else {
-          dayMover.move(diff.days);
-          hourMover.move(diff.hours);
-          minuteMover.move(diff.minutes);
-          secondMover.move(diff.seconds);
+          dM.m(f.d);
+          hM.m(f.h);
+          mM.m(f.m);
+          sM.m(f.s);
         
-          if(localStorage.sound == "1") {
-            audio.play();
-          }
-        
-          new Flasher(diff.days, diff.hours, diff.minutes, diff.seconds).flashIfNeeded();
+          new F(f.d, f.h, f.m, f.s).fin();
         }
       }, 1000);
     },
     stop: function() {
-      clearInterval(clockInterval);
-      audio.pause();
+      clearInterval(ci);
     },
     reset: function() {
       this.stop();
-      $('.n').animate({top:0});
-      clearInterval(flasherInterval);
+      $('.n').a({top:0});
+      clearInterval(fi);
     }
   };
 }
 
-function Loader() {
-  $('.wrapper').css({ paddingTop:$(window).height() / 4 });
+function L() {
+  $('.wrapper').c({ paddingTop:$(window).height() / 4 });
   $('.section, #frame').height($(window).height());
   
-  function populateInputs(titleFromUrl) {
-    if(titleFromUrl != null) {
-      $('#title').val($.urlParam('title'));
-      $('#date').val($.urlParam('date'));
+  function pI(t) {
+    if(t != null) {
+      $('#title').v($.u('t'));
+      $('#date').v($.u('d'));
     } else {
-      $('#date').attr('placeholder', 'November 5, 2010 13:00');
+      $('#date').t('placeholder', 'November 5, 2010 13:00');
     }
   }
   
-  function showPreviousClock(storedTitle) {
-    if(storedTitle != undefined) {
-      $('#previous_clock').text(localStorage.title);
+  function sP(s) {
+    if(s != undefined) {
+      $('#previous_clock').text(db.title);
       $('#previous').show();
     } else {
       $('#previous').hide();
     }
   }
   
-  function resetClock() {
-    if(clock != null) {
-      clock.reset();
+  function rC() {
+    if(k != null) {
+      k.reset();
     }    
   }
   
   return {
-    clock: function(title, date) {
+    c: function(title, date) {
       $('#end_date').text(date.toLocaleString());
       $('#clock_title').text(title);
       
-      var url = window.location.href.replace(window.location.search, '') + '?title=' + title + '&date=' + date;
+      var url = window.location.href.replace(window.location.search, '') + '?t=' + title + '&d=' + date;
       $('#url').text(url);
-      $('#url').attr('href', url);
+      $('#url').t('href', url);
       
-      $('#sections').animate({top: -$('.section').height() }, function() {
-        clock = new Clock(title, date);
-        clock.start();
+      $('#sections').a({top: -$('.section').height() }, function() {
+        k = new C(title, date);
+        k.start();
       });
     },
-    form: function() {
-      $('input[type=text]').val('');
-      $('#sections').animate({top:0 });
+    f: function() {
+      $('input[type=text]').v('');
+      $('#sections').a({top:0 });
       $('.date_info').show();
       $('.error').hide();
       
-      populateInputs($.urlParam('title'));
-      showPreviousClock(localStorage.title);
-      resetClock();
+      pI($.u('title'));
+      sP(db.title);
+      rC();
       
       if(!$.browser.webkit) {
-        new PlaceHolder('input#date');
-        new PlaceHolder('input#title');
+        new PH('input#date');
+        new PH('input#title');
       }
     }
   };
 }
-
-function SoundToggler() {
-  var onText = 'Sound On',
-      offText = 'Sound Off';
-  
-  if(localStorage.sound == undefined) {
-    localStorage.sound = "1";
-  }
-  
-  var text = (localStorage.sound == '1' ? offText : onText);
-  $('#toggle_sound').text(text);
-  
-  return {
-    toggle: function () {
-      if(localStorage.sound == "1") {
-        localStorage.sound = "0";
-        $('#toggle_sound').text(onText);
-        audio.pause();
-      } else {
-        localStorage.sound = "1";
-        $('#toggle_sound').text(offText);
-      }
-    }
-  }
-}
  
-function PlaceHolder(e) {
-  var placeholder = $(e).attr('placeholder');
+function PH(e) {
+  var c = 'placeholder';
+  var p = $(e).t(c);
   
   $(e).blur(function() {
-    if($(e).val() == '') {
-      $(e).val(placeholder);
-      $(e).addClass('placeholder');
+    if($(e).v() == '') {
+      $(e).v(p);
+      $(e).ac(c);
     }    
   });
   
   $(e).focus(function() {
-    if($(e).val() == placeholder) {
-      $(e).removeClass('placeholder');
-      $(e).val('');
+    if($(e).v() == p) {
+      $(e).rc(c);
+      $(e).v('');
     }
   });
   
-  if($(e).val() == '') {
-    $(e).addClass('placeholder');
-    $(e).val(placeholder);
+  if($(e).v() == '') {
+    $(e).ac(c);
+    $(e).v(p);
   }
 }
  
-function g(e, from, to) {
-  $(e).css('background', 'linear-gradient(left top, ' + from + ', ' + to + ')');
-  $(e).css('background', '-webkit-gradient(linear, 0% 0%, 0% 100%, from(' + from + '), to(' + to + '))');
-  $(e).css('background', '-moz-linear-gradient(center top, ' + from + ', ' + to + ')');
-  if($.browser.msie) {
-    $(e).css('background', from);
+function g(e, f, t) {
+  var b = 'background';
+  $(e).c(b, 'linear-gradient(left top, ' + f + ', ' + t + ')');
+  $(e).c(b, '-webkit-gradient(linear, 0% 0%, 0% 100%, from(' + f + '), to(' + t + '))');
+  $(e).c(b, '-moz-linear-gradient(center top, ' + f + ', ' + t + ')');
+  if(ie) {
+    $(e).c(b, f);
   }
 }
 
-function br(e, value) {
-  $(e).css('border-radius', value);
-  $(e).css('-moz-border-radius', value);
+function br(e, v) {
+  $(e).c('border-radius', v);
+  $(e).c('-moz-border-radius', v);
 }
 
 (function($) { 
   g('.hint', '#6185af', '#30445c');
   g('p.error', '#b666b9', '#5a305c');
   
-  $('input[type=text]').hover(function() {
-    $(this).css('background', '#eee');
+  $('input[type=text]').h(function() {
+    $(this).c('background', '#eee');
   }, function() {
     g(this, '#BBB', '#EEE');
   });
   
   g('input[type=text]', '#BBB', '#EEE');
   
-  $('.b').hover(function() {
+  $('.b').h(function() {
     g(this, '#ff0000', '#a22c11');
   }, function() {
     g(this, '#ba3b1d', '#a22c11');
@@ -378,39 +346,32 @@ function br(e, value) {
   br('input', '7px');
   br('.b.small', '5px');
   
-  audio = document.getElementsByTagName("audio")[0],
-  clock = null,
-  loader = new Loader(),
-  soundToggler = new SoundToggler();
+  k = null,
+  l = new L();
 
-  loader.form();
+  l.f();
 
-  $('#load').click(function(ev) {
+  $('#load').cl(function(ev) {
     ev.preventDefault();
-    var title = $('#title').val() || $('#title').attr('placeholder');
-    var date = $('#date').val() || $('#date').attr('placeholder');
+    var t = $('#title').v() || $('#title').t('placeholder');
+    var d = $('#date').v() || $('#date').t('placeholder');
     
-    if(new DateValidator(date).validate()) {
-      loader.clock(title, date);
+    if(new DV(d).v()) {
+      l.c(t, d);
     }
   });
   
-  $('#resume').click(function(ev) {
+  $('#resume').cl(function(ev) {
     ev.preventDefault();
-    loader.clock(localStorage.title, localStorage.date);
+    l.c(db.title, db.date);
   });
 
-  $('#back').click(function(ev) {
+  $('#back').cl(function(ev) {
     ev.preventDefault();
-    loader.form();
-  });
-
-  $('#toggle_sound').click(function(ev) {
-    ev.preventDefault();
-    soundToggler.toggle();
+    l.f();
   });
   
-  if($.browser.msie) {
-    $('.d, .colon, .overlay').css('height','130px');
+  if(ie) {
+    $('.d, .colon, .overlay').c('height','130px');
   }
 })($);

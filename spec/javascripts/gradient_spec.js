@@ -1,18 +1,20 @@
 describe("gradient", function() {
+  var cssSpy;
+  
   beforeEach(function() {
-    spyOn($.fn, 'css');
+    cssSpy = spyOn($.fn, 'c');
   });
   
   it("sets css gradient properties for all browsers on the passed element using the passed colors", function() {
     g({}, '#CCC', '#DDD');
-    expect($.fn.css).wasCalledWith('background', 'linear-gradient(left top, #CCC, #DDD)'); 
-    expect($.fn.css).wasCalledWith('background', '-webkit-gradient(linear, 0% 0%, 0% 100%, from(#CCC), to(#DDD))');
-    expect($.fn.css).wasCalledWith('background', '-moz-linear-gradient(center top, #CCC, #DDD)');
+    expect(cssSpy).wasCalledWith('background', 'linear-gradient(left top, #CCC, #DDD)'); 
+    expect(cssSpy).wasCalledWith('background', '-webkit-gradient(linear, 0% 0%, 0% 100%, from(#CCC), to(#DDD))');
+    expect(cssSpy).wasCalledWith('background', '-moz-linear-gradient(center top, #CCC, #DDD)');
   });
   
   it("sets a css background color when the browser is internet explorer", function() {
-    $.browser.msie = true;
+    ie = true;
     g({}, '#CCC', '#DDD');
-    expect($.fn.css).wasCalledWith('background', '#CCC');
+    expect(cssSpy).wasCalledWith('background', '#CCC');
   });
 });

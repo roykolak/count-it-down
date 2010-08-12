@@ -3,18 +3,18 @@ describe("PlaceHolder", function() {
     it("attaches a blur and focus event", function() {
       spyOn($.fn, 'blur');
       spyOn($.fn, 'focus');
-      new PlaceHolder({});
+      new PH({});
       expect($.fn.blur).wasCalled();
       expect($.fn.focus).wasCalled();
     });
     
     it("sets the value of the input to be the placeholder text and adds a class of placeholder when it has no value", function() {
-      spyOn($.fn, 'val').andReturn('');
-      spyOn($.fn, 'addClass');
-      spyOn($.fn, 'attr').andReturn('this is the placeholder');
-      new PlaceHolder({});
-      expect($.fn.addClass).wasCalledWith('placeholder');
-      expect($.fn.val).wasCalledWith('this is the placeholder');
+      var valSpy = spyOn($.fn, 'v').andReturn('');
+      var addClassSpy = spyOn($.fn, 'ac');
+      spyOn($.fn, 't').andReturn('this is the placeholder');
+      new PH({});
+      expect(addClassSpy).wasCalledWith('placeholder');
+      expect(valSpy).wasCalledWith('this is the placeholder');
     });
   });
 });
