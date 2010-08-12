@@ -185,7 +185,7 @@ function Clock(title, date) {
   localStorage.date = date;
   localStorage.title = title;
 
-  $('#seconds .digit_two .n').addClass('red');
+  $('#seconds .p_two .n').addClass('red');
   
   var dayMover = new Mover($('#days'), 'days'),
       hourMover = new Mover($('#hours'), 'hours'),
@@ -374,7 +374,7 @@ function borderRadius(element, value) {
   gradient('#clock', '#695e2e', '#a49764');
   
   borderRadius('.hint', '4px');
-  borderRadius('.previous', '10px');
+  borderRadius('.p', '10px');
   borderRadius('input', '7px');
   borderRadius('.button.small', '5px');
   

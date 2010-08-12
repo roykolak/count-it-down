@@ -66,7 +66,7 @@ input.date {
 
 
 /* Clock Form */
-.previous {
+.p {
   background:#333;
   color:#FFF;
   padding:13px;
@@ -74,14 +74,14 @@ input.date {
   margin:auto;
   opacity:1;
 }
-.previous p {
+.p p {
 	margin:0;
 	float:left;
 	margin-top:4px;
 	width:340px;
 	text-align:left;
 }
-.previous a {
+.p a {
 	float:right;
 	margin-top:0;
 }
