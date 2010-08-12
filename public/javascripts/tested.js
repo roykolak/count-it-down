@@ -313,8 +313,8 @@ function gradient(element, from, to) {
   $(element).css('background', 'linear-gradient(left top, ' + from + ', ' + to + ')');
   $(element).css('background', '-webkit-gradient(linear, 0% 0%, 0% 100%, from(' + from + '), to(' + to + '))');
   $(element).css('background', '-moz-linear-gradient(center top, ' + from + ', ' + to + ')');
-  if(!element.match(/input/) && !element.match(/button/)) {
-    $(element).css('filter', "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + from + "', endColorstr='" + to + "')");
+  if($.browser.msie) {
+    $(element).css('background', from);
   }
 }
 
@@ -324,7 +324,8 @@ function borderRadius(element, value) {
 }
 
 (function($) { 
-  gradient('.hint', '#343f56', '#888');
+  gradient('.hint', '#6185af', '#30445c');
+  gradient('p.error', '#b666b9', '#5a305c');
   gradient('input[type=text]', '#BBB', '#EEE');
   gradient('.button', '#ba3b1d', '#a22c11');
   gradient('.button:hover', '#ff0000', '#a22c11');
