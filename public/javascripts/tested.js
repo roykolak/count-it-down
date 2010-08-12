@@ -346,7 +346,7 @@ function g(element, from, to) {
   }
 }
 
-function borderRadius(element, value) {
+function br(element, value) {
   $(element).css('border-radius', value);
   $(element).css('-moz-border-radius', value);
 }
@@ -373,10 +373,10 @@ function borderRadius(element, value) {
   g('#f', '#30445c', '#555');
   g('#clock', '#695e2e', '#a49764');
   
-  borderRadius('.hint', '4px');
-  borderRadius('.p', '10px');
-  borderRadius('input', '7px');
-  borderRadius('.b.small', '5px');
+  br('.hint', '4px');
+  br('.p', '10px');
+  br('input', '7px');
+  br('.b.small', '5px');
   
   audio = document.getElementsByTagName("audio")[0],
   clock = null,
