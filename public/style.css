@@ -222,13 +222,13 @@ p.error {
   color:#000;
 }
 
-.controls {
+.c {
   position:absolute;
   top:10px;
   right:5px;
   z-index:10;
 }
-.controls a {
+.c a {
   padding:4px 8px;
   background:#000;
   opacity:.4;
@@ -237,7 +237,7 @@ p.error {
   border-left:1px solid #786d40;
   text-decoration:none;
 }
-.controls a:hover {
+.c a:hover {
   background:#CCC;
   color:#000;
 }
