@@ -161,17 +161,17 @@ p.error {
   float:right;
   background:#000;
 }
-.numbers {
+.n {
   width:83px;
   background:#000;
 }
-.numbers li {
+.n li {
   text-shadow:0px -2px 1px #FFF;
 }
-.numbers.red li {
+.n.red li {
   text-shadow:0px -2px 1px #dc6a6a;
 }
-.colon, .numbers {
+.colon, .n {
   border-right:1px solid #333;
 	color:#CCC;
 }

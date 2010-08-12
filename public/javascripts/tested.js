@@ -39,13 +39,13 @@ function Flasher(d, h, m, s) {
     var selector;
     
     if(h == 0 && m == 0 && s < 3) {
-      selector = '#seconds .digit_one .numbers, #minutes .numbers, #hours .numbers, #days .numbers';
+      selector = '#seconds .digit_one .n, #minutes .n, #hours .n, #days .n';
     } else if(m == 0 && s < 3) {
-      selector = '#seconds .digit_one .numbers, #minutes .numbers, #hours .numbers';
+      selector = '#seconds .digit_one .n, #minutes .n, #hours .n';
     } else if(s < 3) {
-      selector = '#seconds .digit_one .numbers, #minutes .numbers';
+      selector = '#seconds .digit_one .n, #minutes .n';
     } else if(s[1] < 3) {
-      selector = '#seconds .digit_one .numbers';
+      selector = '#seconds .digit_one .n';
     }
 
     return selector;
@@ -58,13 +58,13 @@ function Flasher(d, h, m, s) {
       if(typeof(selector) != 'undefined') {
         $(selector).toggleClass('red');
       } else {
-        $('#seconds .digit_one .numbers, #minutes .numbers, #hours .numbers, #days .numbers').removeClass('red'); 
+        $('#seconds .digit_one .n, #minutes .n, #hours .n, #days .n').removeClass('red'); 
       }
     },
     flashAll: function() {
-      $('.numbers').removeClass('red');
+      $('.n').removeClass('red');
       return setInterval(function() {
-        $('.numbers').toggleClass('red');
+        $('.n').toggleClass('red');
       }, 1000);
     }
   };
@@ -100,9 +100,9 @@ function DateValidator(date, currentDate) {
 
 function Mover(container, unit) {
   var previousTime = null,
-      height = $('.numbers li').height(),
-      digitOne = $('.digit_one .numbers', container),
-      digitTwo = $('.digit_two .numbers', container),
+      height = $('.n li').height(),
+      digitOne = $('.digit_one .n', container),
+      digitTwo = $('.digit_two .n', container),
       firstDigitCount, secondDigitCount;
       
   if(unit == 'days') {
@@ -185,7 +185,7 @@ function Clock(title, date) {
   localStorage.date = date;
   localStorage.title = title;
 
-  $('#seconds .digit_two .numbers').addClass('red');
+  $('#seconds .digit_two .n').addClass('red');
   
   var dayMover = new Mover($('#days'), 'days'),
       hourMover = new Mover($('#hours'), 'hours'),
@@ -223,7 +223,7 @@ function Clock(title, date) {
     },
     reset: function() {
       this.stop();
-      $('.numbers').animate({top:0});
+      $('.n').animate({top:0});
       clearInterval(flasherInterval);
     }
   };
