@@ -83,7 +83,7 @@ function DateValidator(date, currentDate) {
 
       $('.date_info, .error').hide();
 
-      if(date == 'Invalid Date') {
+      if(date == 'Invalid Date' || date == 'NaN') {
         valid = false;
         $('.parse_error').fadeIn();
       } else if(diff.days > 99){
