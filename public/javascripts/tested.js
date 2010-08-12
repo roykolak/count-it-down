@@ -363,12 +363,12 @@ function borderRadius(element, value) {
   
   gradient('input[type=text]', '#BBB', '#EEE');
   
-  $('.button').hover(function() {
+  $('.b').hover(function() {
     gradient(this, '#ff0000', '#a22c11');
   }, function() {
     gradient(this, '#ba3b1d', '#a22c11');
   });
-  gradient('.button', '#ba3b1d', '#a22c11');
+  gradient('.b', '#ba3b1d', '#a22c11');
 
   gradient('#f', '#30445c', '#555');
   gradient('#clock', '#695e2e', '#a49764');
@@ -376,7 +376,7 @@ function borderRadius(element, value) {
   borderRadius('.hint', '4px');
   borderRadius('.p', '10px');
   borderRadius('input', '7px');
-  borderRadius('.button.small', '5px');
+  borderRadius('.b.small', '5px');
   
   audio = document.getElementsByTagName("audio")[0],
   clock = null,

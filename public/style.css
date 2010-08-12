@@ -127,7 +127,7 @@ p.error {
   opacity:0.5;
   border-bottom:1px solid #222;
 }
-.button {
+.b {
   color:#f5baba;
   background:#a22c11;
   text-shadow:0px -1px 0px #000;
@@ -138,7 +138,7 @@ p.error {
   font-size:20px;
   text-decoration:none;
 }
-.button.small {
+.b.small {
   padding:5px 9px;
   font-size:13px;
   border-width:1px;
