@@ -411,6 +411,6 @@ function borderRadius(element, value) {
   });
   
   if($.browser.msie) {
-    $('.digit, .colon, .overlay').css('height','130px');
+    $('.d, .colon, .overlay').css('height','130px');
   }
 })($);

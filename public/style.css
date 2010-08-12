@@ -145,18 +145,18 @@ p.error {
 }
 
 /* Countdown Clock */
-.digit, .colon {
+.d, .colon {
   text-align:center;
   font-size:120px;
 }
-.digit, .colon, .overlay {
+.d, .colon, .overlay {
   height:140px;
 }
 .colon {
   color:#FFF;
   width:50px;
 }
-.digit {
+.d {
   overflow:hidden;
   float:right;
   background:#000;
