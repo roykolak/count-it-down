@@ -280,6 +280,11 @@ function Loader() {
       populateInputs($.urlParam('title'));
       showPreviousClock(localStorage.title);
       resetClock();
+      
+      if(!$.browser.webkit) {
+        new PlaceHolder('input#date');
+        new PlaceHolder('input#title');
+      }
     }
   };
 }
@@ -309,6 +314,29 @@ function SoundToggler() {
   }
 }
  
+function PlaceHolder(element) {
+  var placeholder = $(element).attr('placeholder');
+  
+  $(element).blur(function() {
+    if($(element).val() == '') {
+      $(element).val(placeholder);
+      $(element).addClass('placeholder');
+    }    
+  });
+  
+  $(element).focus(function() {
+    if($(element).val() == placeholder) {
+      $(element).removeClass('placeholder');
+      $(element).val('');
+    }
+  });
+  
+  if($(element).val() == '') {
+    $(element).addClass('placeholder');
+    $(element).val(placeholder);
+  }
+}
+ 
 function gradient(element, from, to) {
   $(element).css('background', 'linear-gradient(left top, ' + from + ', ' + to + ')');
   $(element).css('background', '-webkit-gradient(linear, 0% 0%, 0% 100%, from(' + from + '), to(' + to + '))');
@@ -326,9 +354,22 @@ function borderRadius(element, value) {
 (function($) { 
   gradient('.hint', '#6185af', '#30445c');
   gradient('p.error', '#b666b9', '#5a305c');
+  
+  $('input[type=text]').hover(function() {
+    $(this).css('background', '#eee');
+  }, function() {
+    gradient(this, '#BBB', '#EEE');
+  });
+  
   gradient('input[type=text]', '#BBB', '#EEE');
+  
+  $('.button').hover(function() {
+    gradient(this, '#ff0000', '#a22c11');
+  }, function() {
+    gradient(this, '#ba3b1d', '#a22c11');
+  });
   gradient('.button', '#ba3b1d', '#a22c11');
-  gradient('.button:hover', '#ff0000', '#a22c11');
+
   gradient('#form', '#30445c', '#555');
   gradient('#clock', '#695e2e', '#a49764');
   
@@ -368,4 +409,8 @@ function borderRadius(element, value) {
     ev.preventDefault();
     soundToggler.toggle();
   });
+  
+  if($.browser.msie) {
+    $('.digit, .colon, .overlay').css('height','130px');
+  }
 })($);
