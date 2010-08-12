@@ -313,7 +313,9 @@ function gradient(element, from, to) {
   $(element).css('background', 'linear-gradient(left top, ' + from + ', ' + to + ')');
   $(element).css('background', '-webkit-gradient(linear, 0% 0%, 0% 100%, from(' + from + '), to(' + to + '))');
   $(element).css('background', '-moz-linear-gradient(center top, ' + from + ', ' + to + ')');
-  $(element).css('filter', "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + from + "', endColorstr='" + to + "')");
+  if(!element.match(/input/) && !element.match(/button/)) {
+    $(element).css('filter', "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + from + "', endColorstr='" + to + "')");
+  }
 }
 
 function borderRadius(element, value) {
@@ -321,8 +323,7 @@ function borderRadius(element, value) {
   $(element).css('-moz-border-radius', value);
 }
 
-(function($) {
-  
+(function($) { 
   gradient('.hint', '#343f56', '#888');
   gradient('input[type=text]', '#BBB', '#EEE');
   gradient('.button', '#ba3b1d', '#a22c11');
@@ -339,6 +340,8 @@ function borderRadius(element, value) {
   clock = null,
   loader = new Loader(),
   soundToggler = new SoundToggler();
+
+  loader.form();
 
   $('#load').click(function(ev) {
     ev.preventDefault();
@@ -364,6 +367,4 @@ function borderRadius(element, value) {
     ev.preventDefault();
     soundToggler.toggle();
   });
-   
-  loader.form();
 })($);
