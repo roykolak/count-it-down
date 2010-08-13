@@ -1,5 +1,5 @@
 body {
-  font-family:"Lucida Grande","Arial Unicode MS", sans-serif;
+  font-family:"Lucida Grande";
   text-align:center;
   margin:0px;
   padding:0px;
@@ -19,6 +19,9 @@ h3 {
   color:#544a20;
   text-shadow: 0px 1px 0px #938346;
   font-size:16px;
+  text-align:right;
+  position:absolute;
+  top:-30px;
 }
 h4 {
   margin-bottom:5px;
@@ -37,8 +40,6 @@ input[type=text]:hover {
 }
 input {
   clear:both;
-  display:block;
-  margin:auto;
   margin-bottom:20px;
   text-align:center;
   width:100%;
@@ -52,7 +53,7 @@ input {
 .placeholder {
   color:#aaa;
 }
-input.date {
+input#date {
   font-size:20px;
 }
 .section, .sections {
@@ -60,19 +61,14 @@ input.date {
 }
 .clear { 
 	clear:both;
-	height:0;
-	font-size:0;
 }
 
 
 /* Clock Form */
 .p {
   background:#333;
-  color:#FFF;
   padding:13px;
   color:#CCC;
-  margin:auto;
-  opacity:1;
 }
 .p p {
 	margin:0;
@@ -90,13 +86,8 @@ input.date {
   color:#ba3b1d;
 }
 #f .wrapper {
-  width:800px;
+  width:500px;
   margin:auto;
-}
-#f .left {
-  width:250px;
-  float:left;
-  text-align:left;
 }
 #f h1 {
   color:#FFF;
@@ -108,15 +99,11 @@ input.date {
   font-size:17px;
   color:#ccc;
 }
-#f form {
-  width:450px;
-  float:right;
-}
 p.error {
   background:#f6e660;
   color:#fff;
 }
-.hint {
+#hint {
   font-size:15px;
   text-shadow:0px 1px 0px #000;
   margin-top:-35px;
@@ -149,7 +136,7 @@ p.error {
   text-align:center;
   font-size:120px;
 }
-.d, .colon, .overlay {
+.d, .colon, .o {
   height:140px;
 }
 .colon {
@@ -184,11 +171,6 @@ p.error {
   position:relative;
   background:#000;
 }
-.u h3 {
-  text-align:right;
-  position:absolute;
-  top:-30px;
-}
 .clock {
   border-top:6px solid #433b19;
   border-bottom:6px solid #e6daa3;
@@ -215,7 +197,6 @@ p.error {
   height:12px;
   z-index:100;
   font-size:11px;
-  opacity:0.3;
   color:#000;
 }
 .credit a {
@@ -230,8 +211,6 @@ p.error {
   padding:4px 8px;
   background:#483d0c;
   color:#cbbe83;
-  border-bottom:1px solid #b1a679;
-  border-right:1px solid #786d40;
   text-decoration:none;
 }
 #back:hover {
@@ -246,24 +225,24 @@ p.error {
   padding:10px 10px 10px;
 }
 .s h4,
-.s .url {
+.s #url {
   opacity:.8;
   font-size:12px;
 }
-.s .url:hover {
+.s #url:hover {
   opacity:1;
 }
 .s h4 { 
   color:#000;
   font-size:14px;
 }
-.s .url {
+.s #url {
   background:#c8c1a2;
   padding:5px 9px;
   border-top:1px solid #eee9d1;
   font-weight:bold;
   color:#222;
 }
-.overlay {
+.o {
   -webkit-mask-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.2)));
 }

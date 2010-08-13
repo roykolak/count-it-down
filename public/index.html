@@ -3,33 +3,25 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Count it down</title>
-    <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
     <div id="frame">
       <p class="credit"><a href="mailto:roy.kolak@gmail.com">Roy Kolak</a>, Copyright 2010</p>
       <div id="sections" class="sections">
         <div id="f" class="section">
-          <div class="wrapper">
-            <div class="left">
-              <h1>Countdown to Zero</h1><h2>Your project is due, your friends are visiting, your trip is approaching<br/><br/> Count it down.</h2>
+          <form class="wrapper">
+            <h1>Countdown to zero</h1>
+            <input type="text" id="title" placeholder="Clock title" />
+            <input type="text" id="date" />
+            <p id="hint"></p>
+            <input type="submit" id="load" class="b" value="Start" />
+            <div id="previous" class="p">
+              <p>Psst! <strong id="previous_clock"></strong> is still running.</p>
+              <a href="#" id="resume" class="b small">Resume</a>
+              <div class="clear"></div>
             </div>
-            <form>
-              <input type="text" id="title" placeholder="Clock title" />
-              <p class="hint">The title of your countdown clock.</p>
-              <input type="text" id="date" class="date" />
-              <p class="hint date_info">Your date will be parsed, be friendly!</p>
-              <p class="hint parse_error error">Don't know that date. Maybe try another one?</p>
-              <p class="hint diff_error error">That is too far in the future! Max countdown is 99 days.</p>
-              <input type="submit" id="load" class="b" value="Start" />
-              <div id="previous" class="p">
-                <p>Psst! <strong id="previous_clock"></strong> is still running.</p>
-                <a href="#" id="resume" class="b small">Resume</a>
-                <div class="clear"></div>
-              </div>
-            </form>
-            <div style="clear:both"></div>
-          </div>
+          </form>
         </div>
         <div id="clock" class="section">
           <div class="wrapper">
@@ -39,87 +31,72 @@
               <div class="clock">
                 <div class="u first">
                   <h3>Days</h3>
-                  <div class="overlay">
+                  <div class="o">
                     <ol id="d">
-                      <li class="d digit_two">
-                        <ol class="n">
-                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
-                        </ol>
+                      <li class="d dt">
+                        <ol class="n" data-max="9"></ol>
                       </li>
-                      <li class="d digit_one">
-                        <ol class="n">
-                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                      <li class="d do">
+                        <ol class="n" data-max="9">
                         </ol>
                       </li>
                     </ol>
                   </div>
                 </div>
                 <div class="colon">
-                  <div class="overlay">:</div>
+                  <div class="o">:</div>
                 </div>
                 <div class="u">
                   <h3>Hours</h3>
-                  <div class="overlay">
+                  <div class="o">
                     <ol id="h">
-                      <li class="d digit_two">
-                        <ol class="n">
-                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
-                        </ol>
+                      <li class="d dt">
+                        <ol class="n" data-max="9"></ol>
                       </li>
-                      <li class="d digit_one">
-                        <ol class="n">
-                          <li>0</li><li>1</li><li>2</li><li>0</li>
-                        </ol>
+                      <li class="d do">
+                        <ol class="n" data-max="2"></ol>
                       </li>
                     </ol>
                   </div>
                 </div>
                 <div class="colon">
-                  <div class="overlay">:</div>
+                  <div class="o">:</div>
                 </div>
                 <div class="u">
                   <h3>Minutes</h3>
-                  <div class="overlay">
+                  <div class="o">
                     <ol id="m">
-                      <li class="d digit_two">
-                        <ol class="n">
-                        <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
-                        </ol>
+                      <li class="d dt">
+                        <ol class="n" data-max="9"></ol>
                       </li>
-                      <li class="d digit_one">
-                        <ol class="n">
-                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>0</li>
-                        </ol>
+                      <li class="d do">
+                        <ol class="n" data-max="5"></ol>
                       </li>
                     </ol>
                   </div>
                 </div>
                 <div class="colon">
-                  <div class="overlay">:</div>
+                  <div class="o">:</div>
                 </div>
                 <div class="u last">
                   <h3>Seconds</h3>
-                  <div class="overlay">
+                  <div class="o">
                     <ol id="s">
-                      <li class="d digit_two">
-                        <ol class="n red">
-                        <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
-                        </ol>
+                      <li class="d dt">
+                        <ol class="n red" data-max="9"></ol>
                       </li>
-                      <li class="d digit_one">
-                        <ol class="n">
-                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>0</li>
-                        </ol>
+                      <li class="d do">
+                        <ol class="n" data-max="5"></ol>
                       </li>
                     </ol>
                   </div>
                 </div>
-                <div style="clear:both"></div>
+                <div class="clear"></div>
               </div>
             </div>
-            <h3 id="end_date"></h3>
+            <h2 id="end_date"></h2>
             <div class="s">
-              <h4>Share this countdown: <a href="#" id="url" class="url"></a></h4>
+              <h4>Share this countdown: <a href="#" id="url"></a></h4>
             </div>
           </div>
         </div>

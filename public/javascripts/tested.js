@@ -24,13 +24,15 @@ function DD(t) {
   return {
     b: function(g) {
       var e = Math.ceil(t.getTime() - g.getTime());
-      d = mf(e / (1000 * 60 * 60 * 24)); 
-      e -= d * (1000 * 60 * 60 * 24);
-      h = mf(e / (1000 * 60 * 60)); 
-      e -= h * (1000 * 60 * 60);
-      m = mf(e / (1000 * 60)); 
-      e -= m * (1000 * 60);
-      s = mf(e / 1000);      
+      var x = 1000,
+          y = 60;
+      d = mf(e / (x * y * y * 24)); 
+      e -= d * (x * y * y * 24);
+      h = mf(e / (x * y * y)); 
+      e -= h * (x * y * y);
+      m = mf(e / (x * y)); 
+      e -= m * (x * y);
+      s = mf(e / x);      
       return { d: d, h: h, m: m, s: s };
     }
   };
@@ -45,15 +47,14 @@ function F(d, h, m, s) {
   function gS() {
     var se;
     
-    if(h == 0 && m == 0 && s < 3) {
-      se = '#s .digit_one .n, #m .n, #h .n, #d .n';
-    } else if(m == 0 && s < 3) {
-      se = '#s .digit_one .n, #m .n, #h .n';
-    } else if(s < 3) {
-      se = '#s .digit_one .n, #m .n';
-    } else if(s[1] < 3) {
-      se = '#s .digit_one .n';
-    }
+    if(h == 0 && m == 0 && s < 3)
+      se = '#s .do .n, #m .n, #h .n, #d .n';
+    else if(m == 0 && s < 3)
+      se = '#s .do .n, #m .n, #h .n';
+    else if(s < 3)
+      se = '#s .do .n, #m .n';
+    else if(s[1] < 3)
+      se = '#s .do .n';
 
     return se;
   }
@@ -62,11 +63,10 @@ function F(d, h, m, s) {
     fin: function() {
       var s = gS();
 
-      if(typeof(s) != 'undefined') {
+      if(typeof(s) != 'undefined')
         $(s).toggleClass('red');
-      } else {
-        $('#s .digit_one .n, #m .n, #h .n, #d .n').rc('red'); 
-      }
+      else
+        $('#s .do .n, #m .n, #h .n, #d .n').rc('red');
     },
     fa: function() {
       $('.n').rc('red');
@@ -85,16 +85,12 @@ function DV(d) {
       d = new Date(d);
       var diff = new DD(d).b(new Date());
 
-      $('.date_info, .error').hide();
-
       if(d == 'Invalid Date' || d == 'NaN') {
         v = false;
-        $('.parse_error').fadeIn();
+        $('#hint').x('Don\'t know that date. Try another one').ac('error');
       } else if(diff.d > 99){
         v = false;
-        $('.diff_error').fadeIn();
-      } else {
-        $('.date_info').fadeIn();
+        $('#hint').x('Max countdown is 99 days. Try a closer one').ac('error');
       }
 
       return v;
@@ -105,8 +101,8 @@ function DV(d) {
 function M(c, u) {
   var pT = null,
       h = $('.n li').height(),
-      dO = $('.digit_one .n', c),
-      dT = $('.digit_two .n', c),
+      dO = $('.do .n', c),
+      dT = $('.dt .n', c),
       fD, sD;
       
   if(u == 'days') {
@@ -172,9 +168,8 @@ function M(c, u) {
       }
     },
     c: function(d, h, m) {
-      if(d * h == 0) {
+      if(d * h == 0)
         $(this).c({ top: -(m * h) });
-      }
     }
   };
 }
@@ -224,11 +219,12 @@ function C(t, d) {
 }
 
 function L() {
-  $('.wrapper').c({ paddingTop:$(window).height() / 4 });
-  $('.section, #frame').height($(window).height());
+  var h = $(window).height();
+  $('.wrapper').c({ paddingTop:h / 4 });
+  $('.section, #frame').height(h);
   
-  function pI(t) {
-    if(t != null) {
+  function pI() {
+    if($.u('t') != null) {
       $('#title').v($.u('t'));
       $('#date').v($.u('d'));
     } else {
@@ -237,18 +233,18 @@ function L() {
   }
   
   function sP(s) {
+    var p = '#previous';
     if(s != undefined) {
-      $('#previous_clock').x(db.title);
-      $('#previous').show();
+      $(p+'_clock').x(db.title);
+      $(p).show();
     } else {
-      $('#previous').hide();
+      $(p).hide();
     }
   }
   
   function rC() {
-    if(k != null) {
+    if(k != null)
       k.reset();
-    }    
   }
   
   return {
@@ -268,10 +264,9 @@ function L() {
     f: function() {
       $('input[type=text]').v('');
       $('#sections').a({top:0 });
-      $('.date_info').show();
-      $('.error').hide();
+      $('#hint').x('Your date will be parsed, be friendly!').rc('error');
       
-      pI($.u('title'));
+      pI();
       sP(db.title);
       rC();
       
@@ -312,9 +307,8 @@ function g(e, f, t) {
   $(e).c(b, 'linear-gradient(left top, ' + f + ', ' + t + ')');
   $(e).c(b, '-webkit-gradient(linear, 0% 0%, 0% 100%, from(' + f + '), to(' + t + '))');
   $(e).c(b, '-moz-linear-gradient(center top, ' + f + ', ' + t + ')');
-  if(ie) {
+  if(ie)
     $(e).c(b, f);
-  }
 }
 
 function br(e, v) {
@@ -323,20 +317,22 @@ function br(e, v) {
 }
 
 (function($) { 
-  g('.hint', '#6185af', '#30445c');
+  var x = '#EEE',
+      y = '#BBB';
+  g('#hint', '#6185af', '#30445c');
   g('p.error', '#b666b9', '#5a305c');
   
   $('input[type=text]').h(function() {
-    $(this).c('background', '#eee');
+    $(this).c('background', x);
   }, function() {
-    g(this, '#BBB', '#EEE');
+    g(this, y, x);
   });
   
-  g('input[type=text]', '#BBB', '#EEE');
+  g('input[type=text]', y, x);
   
   $('.b').h(function() {
     g(this, '#ff0000', '#a22c11');
-  }, function() {
+  }, function() { 
     g(this, '#ba3b1d', '#a22c11');
   });
   g('.b', '#ba3b1d', '#a22c11');
@@ -344,7 +340,7 @@ function br(e, v) {
   g('#f', '#30445c', '#555');
   g('#clock', '#695e2e', '#a49764');
   
-  br('.hint', '4px');
+  br('#hint', '4px');
   br('.p', '10px');
   br('input', '7px');
   br('.b.small', '5px');
@@ -356,12 +352,15 @@ function br(e, v) {
 
   $('#load').cl(function(ev) {
     ev.preventDefault();
-    var t = $('#title').v() || $('#title').t('placeholder');
-    var d = $('#date').v() || $('#date').t('placeholder');
+    var c = 'placeholder',
+        e = '#title',
+        f = '#date';
+        
+    var t = $(e).v() || $(e).t(c);
+    var d = $(f).v() || $(f).t(c);
     
-    if(new DV(d).v()) {
+    if(new DV(d).v())
       l.c(t, d);
-    }
   });
   
   $('#resume').cl(function(ev) {
@@ -374,7 +373,16 @@ function br(e, v) {
     l.f();
   });
   
-  if(ie) {
-    $('.d, .colon, .overlay').c('height','130px');
-  }
+  if(ie)
+    $('.d, .colon, .o').c('height','130px');
+    
+  $('[data-max]').each(function() {
+    var max = $(this).attr('data-max'),
+        index = 0;
+    while(index <= max){ 
+      $(this).append('<li>'+index+'</li>');
+      index++;
+    }
+    $(this).append('<li>0</li>');
+  });
 })($);
