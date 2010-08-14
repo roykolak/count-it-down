@@ -1,9 +1,9 @@
 describe("Loader", function() {
   describe("#initialize", function() {
-    var cssSpy;
+    var cssSpy, heightSpy;
     
     beforeEach(function() {
-      spyOn($.fn, 'height').andReturn(400);
+      heightSpy = spyOn($.fn, 'h').andReturn(400);
       cssSpy = spyOn($.fn, 'c');
       new L();      
     });
@@ -12,7 +12,7 @@ describe("Loader", function() {
     });
     
     it("dynamically sets the height of the sections and frame", function() {
-      expect($.fn.height).wasCalledWith(400);
+      expect(heightSpy).wasCalledWith(400);
     });
   });
   
@@ -25,13 +25,6 @@ describe("Loader", function() {
       var valSpy = spyOn($.fn, 'v');
       new L().f();
       expect(valSpy).wasCalledWith('');
-    });
-    
-    it("populates the form with default values when there are no params in the url", function() {
-      spyOn($, 'u').andReturn(null);
-      attrSpy = spyOn($.fn, 't');
-      new L().f();
-      expect(attrSpy).wasCalledWith('placeholder', 'November 5, 2010 13:00');
     });
     
     it("populates the previous clock ui when there is a saved title in localStorage", function() {

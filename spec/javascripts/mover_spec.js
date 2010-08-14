@@ -1,8 +1,8 @@
 describe("Mover", function() {
-  var mover;
+  var mover, heightSpy;
   
   beforeEach(function() {
-    spyOn($.fn, 'height').andReturn(100);
+    heightSpy = spyOn($.fn, 'h').andReturn(100);
     mover = new M({}, "days");
   });
   

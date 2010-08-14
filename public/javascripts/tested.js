@@ -292,10 +292,10 @@ function br(e, v) {
   if(db.title == null && $.u('t') == null)
     l.f();
   else
-    if(db.title != null)
-      l.c(db.title, db.date);
-    else
+    if($.u('t') != null)
       l.c($.u('t'), $.u('d'));
+    else
+      l.c(db.title, db.date);
 
   $('#load').cl(function(ev) {
     ev.preventDefault();

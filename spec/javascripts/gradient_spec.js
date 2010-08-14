@@ -11,10 +11,4 @@ describe("gradient", function() {
     expect(cssSpy).wasCalledWith('background', '-webkit-gradient(linear, 0% 0%, 0% 100%, from(#CCC), to(#DDD))');
     expect(cssSpy).wasCalledWith('background', '-moz-linear-gradient(center top, #CCC, #DDD)');
   });
-  
-  it("sets a css background color when the browser is internet explorer", function() {
-    ie = true;
-    g({}, '#CCC', '#DDD');
-    expect(cssSpy).wasCalledWith('background', '#CCC');
-  });
 });
