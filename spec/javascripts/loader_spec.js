@@ -27,13 +27,6 @@ describe("Loader", function() {
       expect(valSpy).wasCalledWith('');
     });
     
-    it("populars the form with the values in the url when they are available", function() {
-      spyOn($, 'u').andReturn('defined!');
-      var valSpy = spyOn($.fn, 'v');
-      new L().f();
-      expect(valSpy).wasCalledWith('defined!');
-    });
-    
     it("populates the form with default values when there are no params in the url", function() {
       spyOn($, 'u').andReturn(null);
       attrSpy = spyOn($.fn, 't');

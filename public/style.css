@@ -1,10 +1,10 @@
 body {
-  font-family:"Lucida Grande";
+  font-family:"Lucida Grande", Arial;
   text-align:center;
   margin:0px;
   padding:0px;
 }
-ol, li, h1, h3, h4, header {
+ol, li, h1, h3, h4, .e, #n {
   padding:0;
   margin:0;
   position:relative;
@@ -15,13 +15,17 @@ h1 {
   text-shadow: 0px 1px 0px #938346;
   font-size:40px;
 }
+h2 {
+  color:#665d38;
+  font-size:15px;
+}
 h3 {
   color:#544a20;
   text-shadow: 0px 1px 0px #938346;
   font-size:16px;
   text-align:right;
   position:absolute;
-  top:-30px;
+  top:-35px;
 }
 h4 {
   margin-bottom:5px;
@@ -56,10 +60,7 @@ input {
 input#date {
   font-size:20px;
 }
-.section, .sections {
-  position:relative;
-}
-.clear { 
+.a { 
 	clear:both;
 }
 
@@ -82,10 +83,10 @@ input#date {
 	margin-top:0;
 }
 
-#previous_clock {
+#pc {
   color:#ba3b1d;
 }
-#f .wrapper {
+#f .w {
   width:500px;
   margin:auto;
 }
@@ -103,7 +104,7 @@ p.error {
   background:#f6e660;
   color:#fff;
 }
-#hint {
+#i {
   font-size:15px;
   text-shadow:0px 1px 0px #000;
   margin-top:-35px;
@@ -113,6 +114,7 @@ p.error {
   color:#ddd;
   opacity:0.5;
   border-bottom:1px solid #222;
+  width:502px;
 }
 .b {
   color:#f5baba;
@@ -124,6 +126,7 @@ p.error {
   margin-top:40px;
   font-size:20px;
   text-decoration:none;
+  cursor:pointer;
 }
 .b.small {
   padding:5px 9px;
@@ -132,16 +135,16 @@ p.error {
 }
 
 /* Countdown Clock */
-.d, .colon {
+.d, .l {
   text-align:center;
   font-size:120px;
 }
-.d, .colon, .o {
+.d, .l, .o {
   height:140px;
 }
-.colon {
+.l {
   color:#FFF;
-  width:50px;
+  width:55px;
 }
 .d {
   overflow:hidden;
@@ -153,67 +156,66 @@ p.error {
   background:#000;
 }
 .n li {
-  text-shadow:0px -2px 1px #FFF;
+  text-shadow:0px -2px 0px #FFF;
 }
 .n.red li {
-  text-shadow:0px -2px 1px #dc6a6a;
+  text-shadow:0px -2px 0px #dc6a6a;
 }
-.colon, .n {
+.l, .n {
   border-right:1px solid #333;
 	color:#CCC;
 }
 .red {
   color:#e63333;
 }
-.colon,
+.l,
 .u {
   float:left;
   position:relative;
   background:#000;
 }
-.clock {
-  border-top:6px solid #433b19;
-  border-bottom:6px solid #e6daa3;
-  border-left:6px solid #786d40;
-  border-right:6px solid #786d40;
+#k {
+  border-top:8px solid #4f4621;
+  border-bottom:10px solid #cbbf8b;
+  border-left:10px solid #786d40;
+  border-right:10px solid #786d40;
   margin:auto;
-  width:825px;
+  width:840px;
   margin-bottom:20px;
-  margin-top:50px;
+  margin-top:75px;
 }
 #clock {
   position:relative;
 }
-#frame {
+#r {
   width:100%;
   position:relative;
   overflow:hidden;
 }
-.credit {
+#c {
   position:absolute;
   top:-5px;
-  left:-30px;
-  width:220px;
+  left:10px;
   height:12px;
   z-index:100;
   font-size:11px;
   color:#000;
 }
-.credit a {
+#c a {
   color:#000;
 }
 
-#back {
+#b {
   position:absolute;
-  top:10px;
-  right:5px;
+  top:0px;
+  right:20px;
   z-index:10;
   padding:4px 8px;
   background:#483d0c;
   color:#cbbe83;
   text-decoration:none;
 }
-#back:hover {
+#b:hover {
   background:#cbbe83;
   color:#483d0c;
 }

@@ -6,97 +6,95 @@
     <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
-    <div id="frame">
-      <p class="credit"><a href="mailto:roy.kolak@gmail.com">Roy Kolak</a>, Copyright 2010</p>
-      <div id="sections" class="sections">
-        <div id="f" class="section">
-          <form class="wrapper">
+    <div id="r">
+      <p id="c">by <a href="mailto:roy.kolak@gmail.com">Roy Kolak</a></p>
+      <div id="n">
+        <div id="f" class="e">
+          <form class="w">
             <h1>Countdown to zero</h1>
             <input type="text" id="title" placeholder="Clock title" />
-            <input type="text" id="date" />
-            <p id="hint"></p>
+            <input type="text" id="date" placeholder="November 5, 2010 13:00" />
+            <p id="i"></p>
             <input type="submit" id="load" class="b" value="Start" />
             <div id="previous" class="p">
-              <p>Psst! <strong id="previous_clock"></strong> is still running.</p>
+              <p><strong id="pc"></strong> is still running</p>
               <a href="#" id="resume" class="b small">Resume</a>
-              <div class="clear"></div>
+              <div class="a"></div>
             </div>
           </form>
         </div>
-        <div id="clock" class="section">
-          <div class="wrapper">
-            <a href="#" id="back">New clock</a>
-            <h1 id="clock_title"></h1>
-            <div class="countdown_clock">
-              <div class="clock">
-                <div class="u first">
-                  <h3>Days</h3>
-                  <div class="o">
-                    <ol id="d">
-                      <li class="d dt">
-                        <ol class="n" data-max="9"></ol>
-                      </li>
-                      <li class="d do">
-                        <ol class="n" data-max="9">
-                        </ol>
-                      </li>
-                    </ol>
-                  </div>
+        <div id="clock" class="e">
+          <div class="w">
+            <a href="#" id="b">New clock</a>
+            <h1 id="lt"></h1>
+            <div id="k">
+              <div class="u first">
+                <h3>Days</h3>
+                <div class="o">
+                  <ol id="d">
+                    <li class="d dt">
+                      <ol class="n" data-m="9"></ol>
+                    </li>
+                    <li class="d do">
+                      <ol class="n" data-m="9">
+                      </ol>
+                    </li>
+                  </ol>
                 </div>
-                <div class="colon">
-                  <div class="o">:</div>
-                </div>
-                <div class="u">
-                  <h3>Hours</h3>
-                  <div class="o">
-                    <ol id="h">
-                      <li class="d dt">
-                        <ol class="n" data-max="9"></ol>
-                      </li>
-                      <li class="d do">
-                        <ol class="n" data-max="2"></ol>
-                      </li>
-                    </ol>
-                  </div>
-                </div>
-                <div class="colon">
-                  <div class="o">:</div>
-                </div>
-                <div class="u">
-                  <h3>Minutes</h3>
-                  <div class="o">
-                    <ol id="m">
-                      <li class="d dt">
-                        <ol class="n" data-max="9"></ol>
-                      </li>
-                      <li class="d do">
-                        <ol class="n" data-max="5"></ol>
-                      </li>
-                    </ol>
-                  </div>
-                </div>
-                <div class="colon">
-                  <div class="o">:</div>
-                </div>
-                <div class="u last">
-                  <h3>Seconds</h3>
-                  <div class="o">
-                    <ol id="s">
-                      <li class="d dt">
-                        <ol class="n red" data-max="9"></ol>
-                      </li>
-                      <li class="d do">
-                        <ol class="n" data-max="5"></ol>
-                      </li>
-                    </ol>
-                  </div>
-                </div>
-                <div class="clear"></div>
               </div>
+              <div class="l">
+                <div class="o">:</div>
+              </div>
+              <div class="u">
+                <h3>Hours</h3>
+                <div class="o">
+                  <ol id="h">
+                    <li class="d dt">
+                      <ol class="n" data-m="9"></ol>
+                    </li>
+                    <li class="d do">
+                      <ol class="n" data-m="2"></ol>
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              <div class="l">
+                <div class="o">:</div>
+              </div>
+              <div class="u">
+                <h3>Minutes</h3>
+                <div class="o">
+                  <ol id="m">
+                    <li class="d dt">
+                      <ol class="n" data-m="9"></ol>
+                    </li>
+                    <li class="d do">
+                      <ol class="n" data-m="5"></ol>
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              <div class="l">
+                <div class="o">:</div>
+              </div>
+              <div class="u last">
+                <h3>Seconds</h3>
+                <div class="o">
+                  <ol id="s">
+                    <li class="d dt">
+                      <ol class="n red" data-m="9"></ol>
+                    </li>
+                    <li class="d do">
+                      <ol class="n" data-m="5"></ol>
+                    </li>
+                  </ol>
+                </div>
+              </div>
+              <div class="a"></div>
             </div>
-            <h2 id="end_date"></h2>
+            <h2 id="end"></h2>
             <div class="s">
-              <h4>Share this countdown: <a href="#" id="url"></a></h4>
+              <h4>Share: <a href="#" id="url"></a></h4>
             </div>
           </div>
         </div>

@@ -10,6 +10,7 @@ $.fn.rc = $.fn.removeClass;
 $.fn.ac = $.fn.addClass;
 $.fn.t = $.fn.attr;
 $.fn.x = $.fn.text;
+$.fn.h = $.fn.height;
 ie = $.browser.msie;
 sI = setInterval;
 cI = clearInterval;
@@ -26,81 +27,37 @@ function DD(t) {
       var e = Math.ceil(t.getTime() - g.getTime());
       var x = 1000,
           y = 60;
-      d = mf(e / (x * y * y * 24)); 
+      d = mf(e / (x * y * y * 24));
       e -= d * (x * y * y * 24);
       h = mf(e / (x * y * y)); 
       e -= h * (x * y * y);
-      m = mf(e / (x * y)); 
+      m = mf(e / (x * y));
       e -= m * (x * y);
-      s = mf(e / x);      
+      s = mf(e / x);
       return { d: d, h: h, m: m, s: s };
     }
   };
-};        
-
-function F(d, h, m, s) {
-  var s = s.toString(),
-      m = m.toString(),
-      h = h.toString(),
-      d = d.toString();
-      
-  function gS() {
-    var se;
-    
-    if(h == 0 && m == 0 && s < 3)
-      se = '#s .do .n, #m .n, #h .n, #d .n';
-    else if(m == 0 && s < 3)
-      se = '#s .do .n, #m .n, #h .n';
-    else if(s < 3)
-      se = '#s .do .n, #m .n';
-    else if(s[1] < 3)
-      se = '#s .do .n';
-
-    return se;
-  }
-      
-  return {
-    fin: function() {
-      var s = gS();
-
-      if(typeof(s) != 'undefined')
-        $(s).toggleClass('red');
-      else
-        $('#s .do .n, #m .n, #h .n, #d .n').rc('red');
-    },
-    fa: function() {
-      $('.n').rc('red');
-      return sI(function() {
-        $('.n').toggleClass('red');
-      }, 1000);
-    }
-  };
-}
+};
 
 function DV(d) {
-  return {
-    v: function() {
-      var v = true;
-      
-      d = new Date(d);
-      var diff = new DD(d).b(new Date());
+  var v = true;
+  
+  d = new Date(d);
 
-      if(d == 'Invalid Date' || d == 'NaN') {
-        v = false;
-        $('#hint').x('Don\'t know that date. Try another one').ac('error');
-      } else if(diff.d > 99){
-        v = false;
-        $('#hint').x('Max countdown is 99 days. Try a closer one').ac('error');
-      }
+  if(d == 'Invalid Date' || d == 'NaN') {
+    v = false;
+    $('#i').x('Don\'t know that date. Try another one').ac('error');
+  } else if(new DD(d).b(new Date()).d > 99){
+    v = false;
+    $('#i').x('Max countdown is 99 days. Try a closer one').ac('error');
+  }
 
-      return v;
-    }
-  }; 
+  return v;
 }
 
 function M(c, u) {
   var pT = null,
-      h = $('.n li').height(),
+      h = $('.n li').h(),
       dO = $('.do .n', c),
       dT = $('.dt .n', c),
       fD, sD;
@@ -182,7 +139,8 @@ function C(t, d) {
   db.date = d;
   db.title = t;
 
-  $('#s .p_two .n').ac('red');
+  $('.n').rc('red');
+  $('#s .dt .n').ac('red');
   
   var dM = new M($('#d'), 'days'),
       hM = new M($('#h'), 'hours'),
@@ -193,17 +151,18 @@ function C(t, d) {
     start: function() {
       ci = sI(function() {
         var f = dd.b(new Date());
-
+        
         if(f.d < 0 || f.h < 0 || f.m < 0 || f.s < 0) {
-          fi = new F(f.d, f.h, f.m, f.s).fa();
+          $('.n').rc('red');
+          sI(function() {
+            $('.n').toggleClass('red');
+          }, 1000);
           k.stop();
         } else {
           dM.m(f.d);
           hM.m(f.h);
           mM.m(f.m);
           sM.m(f.s);
-        
-          new F(f.d, f.h, f.m, f.s).fin();
         }
       }, 1000);
     },
@@ -219,57 +178,40 @@ function C(t, d) {
 }
 
 function L() {
-  var h = $(window).height();
-  $('.wrapper').c({ paddingTop:h / 4 });
-  $('.section, #frame').height(h);
-  
-  function pI() {
-    if($.u('t') != null) {
-      $('#title').v($.u('t'));
-      $('#date').v($.u('d'));
-    } else {
-      $('#date').t('placeholder', 'November 5, 2010 13:00');
-    }
-  }
-  
-  function sP(s) {
-    var p = '#previous';
-    if(s != undefined) {
-      $(p+'_clock').x(db.title);
-      $(p).show();
-    } else {
-      $(p).hide();
-    }
-  }
-  
-  function rC() {
-    if(k != null)
-      k.reset();
-  }
+  var h = $(window).h();
+  $('.w').c({ paddingTop:h / 4 });
+  $('.e, #r').h(h);
   
   return {
     c: function(title, date) {
-      $('#end_date').x(date.toLocaleString());
-      $('#clock_title').x(title);
+      $('#end').x(date.toLocaleString());
+      $('#lt').x(title);
       
       var url = window.location.href.replace(window.location.search, '') + '?t=' + title + '&d=' + date;
       $('#url').x(url);
       $('#url').t('href', url);
       
-      $('#sections').a({top: -$('.section').height() }, function() {
+      $('#n').a({top: -$('.e').h() }, function() {
         k = new C(title, date);
         k.start();
       });
     },
     f: function() {
       $('input[type=text]').v('');
-      $('#sections').a({top:0 });
-      $('#hint').x('Your date will be parsed, be friendly!');
-      $('#hint').rc('error');
+      $('#n').a({top:0 });
+      $('#i').x('Your date will be parsed, be friendly!');
+      $('#i').rc('error');
       
-      pI();
-      sP(db.title);
-      rC();
+      var p = '#previous';
+      if(db.title != undefined) {
+        $('#pc').x(db.title);
+        $(p).show();
+      } else {
+        $(p).hide();
+      }
+      
+      if(k != null)
+        k.reset();
       
       if(!$.browser.webkit) {
         new PH('input#date');
@@ -308,8 +250,7 @@ function g(e, f, t) {
   $(e).c(b, 'linear-gradient(left top, ' + f + ', ' + t + ')');
   $(e).c(b, '-webkit-gradient(linear, 0% 0%, 0% 100%, from(' + f + '), to(' + t + '))');
   $(e).c(b, '-moz-linear-gradient(center top, ' + f + ', ' + t + ')');
-  if(ie)
-    $(e).c(b, f);
+  $(e).c('filter', "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + f + "', endColorstr='" + t + "')");
 }
 
 function br(e, v) {
@@ -318,30 +259,29 @@ function br(e, v) {
 }
 
 (function($) { 
-  var x = '#EEE',
-      y = '#BBB';
-  g('#hint', '#6185af', '#30445c');
+  var x = '#EEEEEE',
+      y = '#BBBBBB';
+  g('#i', '#6185af', '#30445c');
   g('p.error', '#b666b9', '#5a305c');
   
-  $('input[type=text]').h(function() {
+  $('input[type=text]').hover(function() {
     $(this).c('background', x);
   }, function() {
     g(this, y, x);
   });
-  
   g('input[type=text]', y, x);
   
-  $('.b').h(function() {
+  $('.b').hover(function() {
     g(this, '#ff0000', '#a22c11');
   }, function() {
     g(this, '#ba3b1d', '#a22c11');
   });
   g('.b', '#ba3b1d', '#a22c11');
 
-  g('#f', '#30445c', '#555');
+  g('#f', '#30445c', '#555555');
   g('#clock', '#695e2e', '#a49764');
   
-  br('#hint', '4px');
+  br('#i', '4px');
   br('.p', '10px');
   br('input', '7px');
   br('.b.small', '5px');
@@ -349,7 +289,13 @@ function br(e, v) {
   k = null;
   l = new L();
 
-  l.f();
+  if(db.title == null && $.u('t') == null)
+    l.f();
+  else
+    if(db.title != null)
+      l.c(db.title, db.date);
+    else
+      l.c($.u('t'), $.u('d'));
 
   $('#load').cl(function(ev) {
     ev.preventDefault();
@@ -360,7 +306,7 @@ function br(e, v) {
     var t = $(e).v() || $(e).t(c);
     var d = $(f).v() || $(f).t(c);
     
-    if(new DV(d).v())
+    if(DV(d))
       l.c(t, d);
   });
   
@@ -369,21 +315,22 @@ function br(e, v) {
     l.c(db.title, db.date);
   });
 
-  $('#back').cl(function(ev) {
+  $('#b').cl(function(ev) {
     ev.preventDefault();
     l.f();
   });
   
   if(ie)
-    $('.d, .colon, .o').c('height','130px');
+    $('.d, .l, .o').c('height','130px');
     
-  $('[data-max]').each(function() {
-    var max = $(this).attr('data-max'),
-        index = 0;
-    while(index <= max){ 
-      $(this).append('<li>'+index+'</li>');
-      index++;
+  $('[data-m]').each(function() {
+    var t = this;
+    var m = $(t).attr('data-m'),
+        i = 0;
+    while(i <= m){ 
+      $(t).append('<li>'+i+'</li>');
+      i++;
     }
-    $(this).append('<li>0</li>');
+    $(t).append('<li>0</li>');
   });
 })($);
