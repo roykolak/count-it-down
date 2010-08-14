@@ -264,7 +264,8 @@ function L() {
     f: function() {
       $('input[type=text]').v('');
       $('#sections').a({top:0 });
-      $('#hint').x('Your date will be parsed, be friendly!').rc('error');
+      $('#hint').x('Your date will be parsed, be friendly!');
+      $('#hint').rc('error');
       
       pI();
       sP(db.title);
@@ -332,7 +333,7 @@ function br(e, v) {
   
   $('.b').h(function() {
     g(this, '#ff0000', '#a22c11');
-  }, function() { 
+  }, function() {
     g(this, '#ba3b1d', '#a22c11');
   });
   g('.b', '#ba3b1d', '#a22c11');
