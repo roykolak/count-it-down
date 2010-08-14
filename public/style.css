@@ -64,7 +64,12 @@ input#date {
 	clear:both;
 }
 
-
+body {
+  background:#30445c;
+}
+#f, #clock {
+  display:none;
+}
 /* Clock Form */
 .p {
   background:#333;
@@ -85,6 +90,9 @@ input#date {
 
 #pc {
   color:#ba3b1d;
+}
+#f {
+  height:100%;
 }
 #f .w {
   width:500px;

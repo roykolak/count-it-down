@@ -131,6 +131,45 @@ function M(c, u) {
   };
 }
 
+function F(d, h, m, s) {
+  var s = s.toString(),
+      m = m.toString(),
+      h = h.toString(),
+      d = d.toString();
+      
+  function gS() {
+    var se;
+    
+    if(h == 0 && m == 0 && s < 3)
+      se = '#s .do .n, #m .n, #h .n, #d .n';
+    else if(m == 0 && s < 3)
+      se = '#s .do .n, #m .n, #h .n';
+    else if(s < 3)
+      se = '#s .do .n, #m .n';
+    else if(s[1] < 3)
+      se = '#s .do .n';
+
+    return se;
+  }
+      
+  return {
+    fin: function() {
+      var s = gS();
+
+      if(typeof(s) != 'undefined')
+        $(s).toggleClass('red');
+      else
+        $('#s .do .n, #m .n, #h .n, #d .n').rc('red');
+    },
+    fa: function() {
+      $('.n').rc('red');
+      return sI(function() {
+        $('.n').toggleClass('red');
+      }, 1000);
+    }
+  };
+};
+
 function C(t, d) {
   var dd = new DD(new Date(d)),
       ci, 
@@ -139,7 +178,6 @@ function C(t, d) {
   db.date = d;
   db.title = t;
 
-  $('.n').rc('red');
   $('#s .dt .n').ac('red');
   
   var dM = new M($('#d'), 'days'),
@@ -153,16 +191,15 @@ function C(t, d) {
         var f = dd.b(new Date());
         
         if(f.d < 0 || f.h < 0 || f.m < 0 || f.s < 0) {
-          $('.n').rc('red');
-          sI(function() {
-            $('.n').toggleClass('red');
-          }, 1000);
+          fi = new F(f.d, f.h, f.m, f.s).fa();
           k.stop();
         } else {
           dM.m(f.d);
           hM.m(f.h);
           mM.m(f.m);
           sM.m(f.s);
+          
+          new F(f.d, f.h, f.m, f.s).fin();
         }
       }, 1000);
     },
@@ -333,4 +370,5 @@ function br(e, v) {
     }
     $(t).append('<li>0</li>');
   });
+  $('#f, #clock').show();
 })($);

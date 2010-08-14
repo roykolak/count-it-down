@@ -3,104 +3,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Count it down</title>
-    <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <style>
+      body{ font-family:"Lucida Grande",Arial; text-align:center; margin:0px; padding:0px}ol,li,h1,h3,h4,.e,#n{ padding:0; margin:0; position:relative; list-style-type:none}h1{ color:#3b3314; text-shadow:0px 1px 0px #938346; font-size:40px}h2{ color:#665d38; font-size:15px}h3{ color:#544a20; text-shadow:0px 1px 0px #938346; font-size:16px; text-align:right; position:absolute; top:-35px}h4{ margin-bottom:5px; color:#484124}ol li li{ background:#231F20; position:relative}form{ width:700px; margin:auto}input[type=text]:hover{ background:#eee}input{ clear:both; margin-bottom:20px; text-align:center; width:100%; font-size:30px; padding:10px 0; border:1px solid #555; position:relative; z-index:2; color:#444}.placeholder{ color:#aaa}input#date{ font-size:20px}.a{clear:both}body{ background:#30445c}#f,#clock{ display:none}.p{ background:#333; padding:13px; color:#CCC}.p p{margin:0;float:left;margin-top:4px;width:340px;text-align:left}.p a{float:right;margin-top:0}#pc{ color:#ba3b1d}#f{ height:100%}#f .w{ width:500px; margin:auto}#f h1{ color:#FFF; margin:0 0 20px; text-shadow:1px 2px 0px #000; font-size:50px}#f h2{ font-size:17px; color:#ccc}p.error{ background:#f6e660; color:#fff}#i{ font-size:15px; text-shadow:0px 1px 0px #000; margin-top:-35px; padding:20px 0 5px; z-index:1; position:relative; color:#ddd; opacity:0.5; border-bottom:1px solid #222; width:502px}.b{ color:#f5baba; background:#a22c11; text-shadow:0px -1px 0px #000; border:none; border-top:2px solid #AAA; border-bottom:1px solid #333; margin-top:40px; font-size:20px; text-decoration:none; cursor:pointer}.b.small{ padding:5px 9px; font-size:13px; border-width:1px}.d,.l{ text-align:center; font-size:120px}.d,.l,.o{ height:140px}.l{ color:#FFF; width:55px}.d{ overflow:hidden; float:right; background:#000}.n{ width:83px; background:#000}.n li{ text-shadow:0px -2px 0px #FFF}.n.red li{ text-shadow:0px -2px 0px #dc6a6a}.l,.n{ border-right:1px solid #333;color:#CCC}.red{ color:#e63333}.l,.u{ float:left; position:relative; background:#000}#k{ border-top:8px solid #4f4621; border-bottom:10px solid #cbbf8b; border-left:10px solid #786d40; border-right:10px solid #786d40; margin:auto; width:840px; margin-bottom:20px; margin-top:75px}#clock{ position:relative}#r{ width:100%; position:relative; overflow:hidden}#c{ position:absolute; top:-5px; left:10px; height:12px; z-index:100; font-size:11px; color:#000}#c a{ color:#000}#b{ position:absolute; top:0px; right:20px; z-index:10; padding:4px 8px; background:#483d0c; color:#cbbe83; text-decoration:none}#b:hover{ background:#cbbe83; color:#483d0c}.s{ bottom:0px; position:absolute; width:100%; background:#7d7244; padding:10px 10px 10px}.s h4,.s #url{ opacity:.8; font-size:12px}.s #url:hover{ opacity:1}.s h4{ color:#000; font-size:14px}.s #url{ background:#c8c1a2; padding:5px 9px; border-top:1px solid #eee9d1; font-weight:bold; color:#222}.o{ -webkit-mask-image:-webkit-gradient(linear,left bottom,left top,from(rgba(0,0,0,1)),to(rgba(0,0,0,0.2)))}
+    </style>
   </head>
   <body>
-    <div id="r">
-      <p id="c">by <a href="mailto:roy.kolak@gmail.com">Roy Kolak</a></p>
-      <div id="n">
-        <div id="f" class="e">
-          <form class="w">
-            <h1>Countdown to zero</h1>
-            <input type="text" id="title" placeholder="Clock title" />
-            <input type="text" id="date" placeholder="November 5, 2010 13:00" />
-            <p id="i"></p>
-            <input type="submit" id="load" class="b" value="Start" />
-            <div id="previous" class="p">
-              <p><strong id="pc"></strong> is still running</p>
-              <a href="#" id="resume" class="b small">Resume</a>
-              <div class="a"></div>
-            </div>
-          </form>
-        </div>
-        <div id="clock" class="e">
-          <div class="w">
-            <a href="#" id="b">New clock</a>
-            <h1 id="lt"></h1>
-            <div id="k">
-              <div class="u first">
-                <h3>Days</h3>
-                <div class="o">
-                  <ol id="d">
-                    <li class="d dt">
-                      <ol class="n" data-m="9"></ol>
-                    </li>
-                    <li class="d do">
-                      <ol class="n" data-m="9">
-                      </ol>
-                    </li>
-                  </ol>
-                </div>
-              </div>
-              <div class="l">
-                <div class="o">:</div>
-              </div>
-              <div class="u">
-                <h3>Hours</h3>
-                <div class="o">
-                  <ol id="h">
-                    <li class="d dt">
-                      <ol class="n" data-m="9"></ol>
-                    </li>
-                    <li class="d do">
-                      <ol class="n" data-m="2"></ol>
-                    </li>
-                  </ol>
-                </div>
-              </div>
-              <div class="l">
-                <div class="o">:</div>
-              </div>
-              <div class="u">
-                <h3>Minutes</h3>
-                <div class="o">
-                  <ol id="m">
-                    <li class="d dt">
-                      <ol class="n" data-m="9"></ol>
-                    </li>
-                    <li class="d do">
-                      <ol class="n" data-m="5"></ol>
-                    </li>
-                  </ol>
-                </div>
-              </div>
-              <div class="l">
-                <div class="o">:</div>
-              </div>
-              <div class="u last">
-                <h3>Seconds</h3>
-                <div class="o">
-                  <ol id="s">
-                    <li class="d dt">
-                      <ol class="n red" data-m="9"></ol>
-                    </li>
-                    <li class="d do">
-                      <ol class="n" data-m="5"></ol>
-                    </li>
-                  </ol>
-                </div>
-              </div>
-              <div class="a"></div>
-            </div>
-            <h2 id="end"></h2>
-            <div class="s">
-              <h4>Share: <a href="#" id="url"></a></h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div id="r"><p id="c">by<a href="mailto:roy.kolak@gmail.com">Roy Kolak</a></p><div id="n"><div id="f" class="e"><form class="w"><h1>Countdown to zero</h1><input id="title" placeholder="Clock title"><input id="date" placeholder="November 5, 2010 13:00"><p id="i"></p><input type="submit" id="load" class="b" value="Start"><div id="previous" class="p"><p><strong id="pc"></strong>is still running</p><a href="#" id="resume" class="b small">Resume</a><div class="a"></div></div></form></div><div id="clock" class="e"><div class="w"><a href="#" id="b">New clock</a><h1 id="lt"></h1><div id="k"><div class="u first"><h3>Days</h3><div class="o"><ol id="d"><li class="d dt"><ol class="n" data-m="9"></ol></li><li class="d do"><ol class="n" data-m="9"></ol></li></ol></div></div><div class="l"><div class="o">:</div></div><div class="u"><h3>Hours</h3><div class="o"><ol id="h"><li class="d dt"><ol class="n" data-m="9"></ol></li><li class="d do"><ol class="n" data-m="2"></ol></li></ol></div></div><div class="l"><div class="o">:</div></div><div class="u"><h3>Minutes</h3><div class="o"><ol id="m"><li class="d dt"><ol class="n" data-m="9"></ol></li><li class="d do"><ol class="n" data-m="5"></ol></li></ol></div></div><div class="l"><div class="o">:</div></div><div class="u last"><h3>Seconds</h3><div class="o"><ol id="s"><li class="d dt"><ol class="n red" data-m="9"></ol></li><li class="d do"><ol class="n" data-m="5"></ol></li></ol></div></div><div class="a"></div></div><h2 id="end"></h2><div class="s"><h4>Share:<a href="#" id="url"></a></h4></div></div></div></div></div>
     <script src="javascripts/jquery.js"></script>
-    <script src="javascripts/tested.js"></script>
+    <script>
+        db=localStorage;mf=Math.floor;$.fn.a=$.fn.animate;$.fn.c=$.fn.css;$.fn.cl=$.fn.click;$.fn.v=$.fn.val;$.fn.h=$.fn.hover;$.fn.rc=$.fn.removeClass;$.fn.ac=$.fn.addClass;$.fn.t=$.fn.attr;$.fn.x=$.fn.text;$.fn.h=$.fn.height;ie=$.browser.msie;sI=setInterval;cI=clearInterval;$.u=function(n){var r=new RegExp('[\\?&]'+n+'=([^&#]*)').exec(window.location.href);return(r!=null?unescape(r[1]):null)};function DD(t){return{b:function(g){var e=Math.ceil(t.getTime()-g.getTime());var x=1000,y=60;d=mf(e/(x*y*y*24));e-=d*(x*y*y*24);h=mf(e/(x*y*y));e-=h*(x*y*y);m=mf(e/(x*y));e-=m*(x*y);s=mf(e/x);return{d:d,h:h,m:m,s:s}}}};function DV(d){var v=true;d=new Date(d);if(d=='Invalid Date'||d=='NaN'){v=false;$('#i').x('Don\'t know that date. Try another one').ac('error')}else if(new DD(d).b(new Date()).d>99){v=false;$('#i').x('Max countdown is 99 days. Try a closer one').ac('error')}return v}function M(c,u){var pT=null,h=$('.n li').h(),dO=$('.do .n',c),dT=$('.dt .n',c),fD,sD;if(u=='days'){fD=10;sD=10}else if(u=='hours'){fD=3;sD=10}else{fD=6;sD=10}doj=false;dtj=false;return{h:h,pT:pT,m:function(t){var t=t.toString();if(this.pT!=t){this.pT=t;var s=this;if(t.length==2){doj=false;dtj=false;$(dO).a({top:-(t[0]*this.h)},function(){s.c.call(this,t[0],s.h,fD)});$(dT).a({top:-(t[1]*this.h)},function(){s.c.call(this,t[1],s.h,sD)})}else if(t.length==1){dtj=false;if(doj!=true){$(dO).a({top:0},function(){s.c.call(this,0,s.h,fD);doj=true})}$(dT).a({top:-(t*this.h)},function(){s.c.call(this,t,s.h,sD)})}else{if(doj!=true){$(dO).a({top:0},function(){s.c.call(this,0,s.h,fD);doj=true})}if(dtj!=true){$(dT).a({top:-(t*this.h)},function(){s.c.call(this,t,s.h,sD);dtj=true})}}}},c:function(d,h,m){if(d*h==0)$(this).c({top:-(m*h)})}}}function F(d,h,m,s){var s=s.toString(),m=m.toString(),h=h.toString(),d=d.toString();function gS(){var se;if(h==0&&m==0&&s<3)se='#s .do .n, #m .n, #h .n, #d .n';else if(m==0&&s<3)se='#s .do .n, #m .n, #h .n';else if(s<3)se='#s .do .n, #m .n';else if(s[1]<3)se='#s .do .n';return se}return{fin:function(){var s=gS();if(typeof(s)!='undefined')$(s).toggleClass('red');else $('#s .do .n, #m .n, #h .n, #d .n').rc('red')},fa:function(){$('.n').rc('red');return sI(function(){$('.n').toggleClass('red')},1000)}}};function C(t,d){var dd=new DD(new Date(d)),ci,fi;db.date=d;db.title=t;$('#s .dt .n').ac('red');var dM=new M($('#d'),'days'),hM=new M($('#h'),'hours'),mM=new M($('#m'),'minutes'),sM=new M($('#s'),'seconds');return{start:function(){ci=sI(function(){var f=dd.b(new Date());if(f.d<0||f.h<0||f.m<0||f.s<0){fi=new F(f.d,f.h,f.m,f.s).fa();k.stop()}else{dM.m(f.d);hM.m(f.h);mM.m(f.m);sM.m(f.s);new F(f.d,f.h,f.m,f.s).fin()}},1000)},stop:function(){cI(ci)},reset:function(){this.stop();$('.n').a({top:0});cI(fi)}}}function L(){var h=$(window).h();$('.w').c({paddingTop:h/4});$('.e, #r').h(h);return{c:function(title,date){$('#end').x(date.toLocaleString());$('#lt').x(title);var url=window.location.href.replace(window.location.search,'')+'?t='+title+'&d='+date;$('#url').x(url);$('#url').t('href',url);$('#n').a({top:-$('.e').h()},function(){k=new C(title,date);k.start()})},f:function(){$('input[type=text]').v('');$('#n').a({top:0});$('#i').x('Your date will be parsed, be friendly!');$('#i').rc('error');var p='#previous';if(db.title!=undefined){$('#pc').x(db.title);$(p).show()}else{$(p).hide()}if(k!=null)k.reset();if(!$.browser.webkit){new PH('input#date');new PH('input#title')}}}}function PH(e){var c='placeholder';var p=$(e).t(c);$(e).blur(function(){if($(e).v()==''){$(e).v(p);$(e).ac(c)}});$(e).focus(function(){if($(e).v()==p){$(e).rc(c);$(e).v('')}});if($(e).v()==''){$(e).ac(c);$(e).v(p)}}function g(e,f,t){var b='background';$(e).c(b,'linear-gradient(left top, '+f+', '+t+')');$(e).c(b,'-webkit-gradient(linear, 0% 0%, 0% 100%, from('+f+'), to('+t+'))');$(e).c(b,'-moz-linear-gradient(center top, '+f+', '+t+')');$(e).c('filter',"progid:DXImageTransform.Microsoft.gradient(startColorstr='"+f+"', endColorstr='"+t+"')")}function br(e,v){$(e).c('border-radius',v);$(e).c('-moz-border-radius',v)}(function($){var x='#EEEEEE',y='#BBBBBB';g('#i','#6185af','#30445c');g('p.error','#b666b9','#5a305c');$('input[type=text]').hover(function(){$(this).c('background',x)},function(){g(this,y,x)});g('input[type=text]',y,x);$('.b').hover(function(){g(this,'#ff0000','#a22c11')},function(){g(this,'#ba3b1d','#a22c11')});g('.b','#ba3b1d','#a22c11');g('#f','#30445c','#555555');g('#clock','#695e2e','#a49764');br('#i','4px');br('.p','10px');br('input','7px');br('.b.small','5px');k=null;l=new L();if(db.title==null&&$.u('t')==null)l.f();else if($.u('t')!=null)l.c($.u('t'),$.u('d'));else l.c(db.title,db.date);$('#load').cl(function(ev){ev.preventDefault();var c='placeholder',e='#title',f='#date';var t=$(e).v()||$(e).t(c);var d=$(f).v()||$(f).t(c);if(DV(d))l.c(t,d)});$('#resume').cl(function(ev){ev.preventDefault();l.c(db.title,db.date)});$('#b').cl(function(ev){ev.preventDefault();l.f()});if(ie)$('.d, .l, .o').c('height','130px');$('[data-m]').each(function(){var t=this;var m=$(t).attr('data-m'),i=0;while(i<=m){$(t).append('<li>'+i+'</li>');i++}$(t).append('<li>0</li>')});$('#f, #clock').show()})($);
+    </script>
   </body>
 </html>
