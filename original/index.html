@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Count it down</title>
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+  </head>
+  <body>
+    <div id="frame">
+      <p class="credit"><a href="mailto:roy.kolak@gmail.com">Roy Kolak</a>, Copyright 2010</p>
+      <div id="sections" class="sections">
+        <div id="form" class="section">
+          <div class="wrapper">
+            <div class="left">
+              <h1>Countdown to Zero</h1><h2>Your project is due, your friends are visiting, your trip is approaching<br/><br/> Count it down.</h2>
+            </div>
+            <form>
+              <input type="text" id="title" placeholder="Clock title" />
+              <p class="hint">The title of your countdown clock.</p>
+              <input type="text" id="date" class="date" />
+              <p class="hint date_info">Your date will be parsed, be friendly!</p>
+              <p class="hint parse_error error">Don't know that date. Maybe try another one?</p>
+              <p class="hint diff_error error">That is too far in the future! Max countdown is 99 days.</p>
+              <input type="submit" id="load" class="button" value="Start" />
+              <div id="previous" class="previous">
+                <p>Psst! <strong id="previous_clock"></strong> is still running.</p>
+                <a href="#" id="resume" class="button small">Resume</a>
+                <div class="clear"></div>
+              </div>
+            </form>
+            <div style="clear:both"></div>
+          </div>
+        </div>
+        <div id="clock" class="section">
+          <div class="wrapper">
+            <audio id="tick" src="tick.mp3" loop="loop"></audio>
+            <div class="controls">
+              <a href="#" id="toggle_sound" class="sound">Toggle sound</a>
+              <a href="#" id="back">New clock</a>
+            </div>          
+            <h1 id="clock_title"></h1>
+            <div class="countdown_clock">
+              <div class="clock">
+                <div class="unit first">
+                  <h3>Days</h3>
+                  <div class="overlay">
+                    <ol id="days">
+                      <li class="digit digit_two">
+                        <ol class="numbers">
+                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                        </ol>
+                      </li>
+                      <li class="digit digit_one">
+                        <ol class="numbers">
+                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+                <div class="colon">
+                  <div class="overlay">:</div>
+                </div>
+                <div class="unit">
+                  <h3>Hours</h3>
+                  <div class="overlay">
+                    <ol id="hours">
+                      <li class="digit digit_two">
+                        <ol class="numbers">
+                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                        </ol>
+                      </li>
+                      <li class="digit digit_one">
+                        <ol class="numbers">
+                          <li>0</li><li>1</li><li>2</li><li>0</li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+                <div class="colon">
+                  <div class="overlay">:</div>
+                </div>
+                <div class="unit">
+                  <h3>Minutes</h3>
+                  <div class="overlay">
+                    <ol id="minutes">
+                      <li class="digit digit_two">
+                        <ol class="numbers">
+                        <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                        </ol>
+                      </li>
+                      <li class="digit digit_one">
+                        <ol class="numbers">
+                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>0</li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+                <div class="colon">
+                  <div class="overlay">:</div>
+                </div>
+                <div class="unit last">
+                  <h3>Seconds</h3>
+                  <div class="overlay">
+                    <ol id="seconds">
+                      <li class="digit digit_two">
+                        <ol class="numbers red">
+                        <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>0</li>
+                        </ol>
+                      </li>
+                      <li class="digit digit_one">
+                        <ol class="numbers">
+                          <li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>0</li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+                <div style="clear:both"></div>
+              </div>
+            </div>
+            <h3 id="end_date"></h3>
+            <div class="sharing">
+              <h4>Share this countdown: <a href="#" id="url" class="url"></a></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="javascripts/jquery.js"></script>
+    <script src="javascripts/tested.js"></script>
+  </body>
+</html>
